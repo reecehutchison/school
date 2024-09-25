@@ -1,3 +1,10 @@
+/*
+* Reece Hutchison
+* Program 2 - Lab assignment 3
+* cs2010 - Franco Carlnacci
+*/
+
+
 #include <iostream>
 
 #define EXIT_CODE 0

@@ -20,5 +20,12 @@ program 2
     1. g++ program2.cpp -o add_numbers
     2. ./add_numbers
 
-
 ![Alt Text](./program2.png)
+
+
+program 3
+    1. g++ program3.cpp -o alias_program
+    2. ./alias_program
+
+
+![Alt Text](./program3.png)
