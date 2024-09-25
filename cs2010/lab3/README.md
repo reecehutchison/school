@@ -10,4 +10,4 @@ instructions to build in a unix enviornment :
     3. ./change_calculator < test1.txt
 
 
-![Alt Text][./program1.png]
+![Alt Text](./program1.png)
