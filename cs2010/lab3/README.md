@@ -1,6 +1,9 @@
 #Program One
 
 instructions to build in a unix enviornment : 
+
+
+program 1
     1. chmod -x build1.sh     --> this will add an exe attribute to the file
     2. ./build1.sh            --> will build and execute the program
 
@@ -11,3 +14,11 @@ instructions to build in a unix enviornment :
 
 
 ![Alt Text](./program1.png)
+
+
+program 2
+    1. g++ program2.cpp -o add_numbers
+    2. ./add_numbers
+
+
+![Alt Text](./program2.png)
