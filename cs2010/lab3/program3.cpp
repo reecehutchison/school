@@ -23,6 +23,8 @@ int main() {
     VEC v=&a;
     MATRIX m=&v;
 
+    // note: use two derefrences oporators since m is a 
+    //       pointer to a pointer...
     cout << "V : " << *v << endl;
     cout << "M : " << **m << endl << endl;
     cout << "--- Done ---" << endl;
