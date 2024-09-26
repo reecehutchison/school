@@ -28,7 +28,7 @@ int main() {
     double *a=&x;
     double *b=&y;
 
-    // add the values using their pointers
+    // add the values using their pointers --> use dereference oporator
     const double sum=(*a)+(*b);
 
     // display results
