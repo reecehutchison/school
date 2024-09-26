@@ -22,15 +22,15 @@ int main() {
     // program definition
     cout << "------------------------------------------------------------------" << endl;
     cout << "This program finds the change owed from an amount of pennies 0-100" << endl << endl;
-
+   
 
     // handle std input(s)
     vector<int> prices;
     cout << "Enter number of change calculations : ";
     int n;                     // note: input size must be specified as the
-    cin >> n;                  //       first argument when running the exe...
-
-
+    cin >> n;                  //       first input through the stream when 
+                               //       running the exe...
+                               
     cout << endl;
     for(int i=0; i<n; ++i) {
         int tmp;
