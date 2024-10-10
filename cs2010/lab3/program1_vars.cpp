@@ -24,6 +24,7 @@ void display_change(int price) {
 
     //find coin amounts
     while(price>0) {
+
         if(price>=QUARTER) {
             ++quarter_count;
             price-=QUARTER;
