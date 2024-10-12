@@ -1,9 +1,9 @@
 PROG = gameoflife
 
 all:
-	g++ main.cpp helpers.cpp -o $(PROG) -std=c++17 -lcurses 
+	g++ main.cpp helpers.cpp -o $(PROG) -std=c++17 -lncurses 
 
-run:
+run: all
 	./$(PROG)
 
 clean: 

@@ -5,7 +5,7 @@
 //  Created by Reece Hutchison on 2024-10-01.
 //
 
-extern void game_of_life();
+extern int game_of_life();
 
 int main(int argc, const char * argv[]) {
 
@@ -21,6 +21,7 @@ int main(int argc, const char * argv[]) {
  - no more then three levels of nesting --> the big one!!
  - don't write comments, make code readable by using macros (try to write very readable code)
  - focus on naming very good (no abbreviations)
+ - a function should be only about the size of one screen / page of paper
  */
 
 
