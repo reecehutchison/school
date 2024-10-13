@@ -35,6 +35,6 @@ a continueous mode, where you can simulate the game
 at a constant speed. Press 1 or 2 during the animation
 to change the speed it goes. During manual mode, you will
 need to press a key (any key) to move the generation 
-forwards. At anytime, during the configuration of the board, 
-or during the manual or animation modes, press q to exit the
-program. 
+forwards. At anytime, during manual or animation modes, 
+press q to exit the program. During the config of the board, 
+press 4 to exit.
