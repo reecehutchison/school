@@ -305,12 +305,12 @@ void print_ani_items(int count, int speed) {
 
 void animation_instructions() {
     mvprintw(4, 20, "Press keys to change Animation Mode options. ");
-    mvprintw(7, 45, "1. Increase speed");
-    mvprintw(8, 45, "2. Decrease speed");
+    mvprintw(7, 45, "1. Increase delay");
+    mvprintw(8, 45, "2. Decrease delay");
 }
 
 void display_speed(int speed) {
-    mvprintw(7, 16, "Speed : %d", speed);
+    mvprintw(7, 16, "Delay : %d", speed);
 }
 
 
