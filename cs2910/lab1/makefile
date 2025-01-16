@@ -1,7 +1,7 @@
-PROG = db
+PROG = prog1
 
 all:
-	gcc main.c -o $(PROG)
+	gcc main.c -o $(PROG) -lncurses
 
 run: all
-	./db
+	./prog1
