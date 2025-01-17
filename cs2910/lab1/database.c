@@ -45,11 +45,14 @@ struct Node* create_node(
 }
 
 struct Node* insert_node(struct Node* root, struct Node* new_node) { 
-    if(atoi(root->id)>=atoi(new_node->id))
-        insert_node(root->left, new_node); 
+    if(root==NULL) 
+        return new_node; 
+
+    if(atoi(new_node->id)<atoi(root->id))
+        root->left=insert_node(root->left, new_node);  
     else
-        insert_node(root->right, new_node);
-    return root;  
+        root->right=insert_node(root->right, new_node);  
+    return root;
 }
 
 

@@ -37,6 +37,16 @@ int main() {
     fclose(fp);
 */
 
+    struct Node* a_node=create_node("1", "a", "a", "a", "a");
+    struct Node* b_node=create_node("2", "b", "b", "b", "b");
+    struct Node* c_node=create_node("-1", "c", "c", "c", "c");
+    
+    insert_node(a_node, b_node);
+    insert_node(a_node, c_node);
+
+    mvprintw(7, 7, a_node->id);
+    mvprintw(8, 8, a_node->right->id);
+    mvprintw(9, 9, a_node->left->id);
 
 
     while(1) {
