@@ -7,6 +7,7 @@
 
 #define STUDENT_FILE "student.data"
 #define STRING_LENGTH 99
+#define LINE_LENGTH 999
 
 
 void init_ncurses() {
@@ -106,4 +107,56 @@ void display_courses(struct Monotonic_Stack* stack) {
     for(int i=0; i<stack->size; ++i)
        printw("%s ", stack->courses[i]);
     return;
+}
+
+void test_parse(char* filename) {
+    FILE* file=fopen(filename, "r");
+    if(file==NULL) {
+        mvprintw(7, 7,"Error opening file");
+        return;
+    }
+    char line[LINE_LENGTH];
+
+    while(fgets(line, sizeof(line), file)) {
+        mvprintw(7, 7,"Read line: %s", line);
+    }
+}
+
+void parse_files(
+        char* student_file,
+        char* course_file,
+        char* grade_file, 
+        struct Node* root
+) {
+    //
+    // parse for motonomic stack
+    parse_bst(student_file, root);
+
+
+    //
+    //parse for arr..
+}
+
+void parse_bst(char* student_file, struct Node* root) {
+    FILE* file; 
+
+    file=fopen(student_file, "r");
+    while (!feof(file)) {
+        char line[LINE_LENGTH];
+        while(fgets(line, sizeof(line), file)) {
+            struct Node* new_node=create_node("a", "a", "a", "a", "a");
+            char* token=strtok(line, ",");
+            strcpy(new_node->id, token); 
+            token=strtok(NULL, ",");  
+            strcpy(new_node->last_name, token);
+            token=strtok(NULL, ","); 
+            strcpy(new_node->first_name, token);  
+            token=strtok(NULL, ","); 
+            strcpy(new_node->phone_number, token);
+            token=strtok(NULL, ","); 
+            strcpy(new_node->email, token);
+            insert_node(root, new_node);
+        }
+    } 
+    fclose(file);
 }

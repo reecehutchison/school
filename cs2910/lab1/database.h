@@ -3,6 +3,8 @@
 
 #define STRING_LENGTH 99
 #define COURSE_LENGTH 99
+#define ROWS 99
+#define COLUMNS 99
 
 void init_ncurses(); 
 void display_debug_info(int ch);
@@ -46,6 +48,19 @@ struct Course* create_course(
 void insert_course(struct Monotonic_Stack* stack, struct Course* new_course);
 void display_courses(struct Monotonic_Stack* stack);
 
+// 2d arr strings (eg: course_name, studentcode grade, studentcode grade...) 
+//                     course_name, studentcode grade, studentcode grade...
+typedef char stringarr[ROWS][COLUMNS][STRING_LENGTH];
 
+
+// parser stuff
+void parse_files(
+        char* student_file,
+        char* course_file,
+        char* grade_file,
+        struct Node* root
+);
+void parse_bst(char* student_file, struct Node* root);
+void test_parse(char* filename);
 
 #endif

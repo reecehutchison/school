@@ -9,7 +9,8 @@
 //  - parsing (do this after data structures)
 //  - students (binary search tree, sort by id)
 //  - courses (monotonic stack (with random access), sorted alphabetically)
-//  - grades (2d array... classes by list of structs that hold grade and id)
+//  - grades -->  (eg: course_name, studentcode grade, studentcode grade...) 
+//                     course_name, studentcode grade, studentcode grade...
 //
 
 int debug=1; 
@@ -18,22 +19,11 @@ int debug=1;
 
 int main() {
 
-
     int ch;
 
     init_ncurses();
     mvprintw(2, 3, "-- Database Program --"); 
     mvprintw(3, 3, "press q to quit");
-
-/* -- parsing stuff --
-    fp=fopen(STUDENT_FILE, "r");
-    
-    char word[STRING_LENGTH]; 
-    fscanf(fp, "%s", word);
-    mvprintw(7, 7, "%s", word);
-
-    fclose(fp);
-*/
 
 /* bst tree stuff
     struct Node* a_node=create_node("1", "a", "a", "a", "a");
@@ -63,6 +53,22 @@ int main() {
     mvprintw(5, 6, "");
     display_courses(stack);
 */
+/*
+    stringarr arr;  // typedef char stringarr[ROWS][COLS][STRING_LENGTH];
+    int arr_index=0; // the current empty row...
+                     //
+    strcpy(arr[0][0], "hello");
+    mvprintw(7, 7, arr[0][0]);
+*/
+
+    struct Node* root=create_node("0", "a", "a", "a", "a");
+
+    char* student_file="student.csv";
+    char* course_file="course.csv";
+    char* grade_file="grades.csv";
+    parse_files(student_file, course_file, grade_file, root);
+
+
 
 
     while(1) {
