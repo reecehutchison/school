@@ -60,15 +60,21 @@ int main() {
     strcpy(arr[0][0], "hello");
     mvprintw(7, 7, arr[0][0]);
 */
-
+    // init bst
     struct Node* root=create_node("0", "a", "a", "a", "a");
+
+    // init stack
+    struct Monotonic_Stack s; 
+    struct Monotonic_Stack* stack=&s;
+    stack->size=0;
 
     char* student_file="student.csv";
     char* course_file="course.csv";
     char* grade_file="grades.csv";
-    parse_files(student_file, course_file, grade_file, root);
+    parse_files(student_file, course_file, grade_file, root, stack);
 
-
+    mvprintw(7, 7, "");
+    display_courses(stack);
 
 
     while(1) {

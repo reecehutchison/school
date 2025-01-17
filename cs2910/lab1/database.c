@@ -126,15 +126,12 @@ void parse_files(
         char* student_file,
         char* course_file,
         char* grade_file, 
-        struct Node* root
+        struct Node* root,
+        struct Monotonic_Stack* stack
 ) {
-    //
-    // parse for motonomic stack
     parse_bst(student_file, root);
+    parse_stack(course_file, stack);
 
-
-    //
-    //parse for arr..
 }
 
 void parse_bst(char* student_file, struct Node* root) {
@@ -156,6 +153,25 @@ void parse_bst(char* student_file, struct Node* root) {
             token=strtok(NULL, ","); 
             strcpy(new_node->email, token);
             insert_node(root, new_node);
+        }
+    } 
+    fclose(file);
+}
+
+void parse_stack(char* course_file, struct Monotonic_Stack* stack) {
+    FILE* file; 
+    file=fopen(course_file, "r");
+    while (!feof(file)) {
+        char line[LINE_LENGTH];
+        while(fgets(line, sizeof(line), file)) {  
+            struct Course* new_course=create_course("a", "a", "a");
+            char* token=strtok(line, ",");
+            strcpy(new_course->name, token);
+            token=strtok(NULL, ","); 
+            strcpy(new_course->code, token);
+            token=strtok(NULL, ","); 
+            strcpy(new_course->semester, token);
+            insert_course(stack, new_course);
         }
     } 
     fclose(file);

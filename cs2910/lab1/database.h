@@ -55,12 +55,15 @@ typedef char stringarr[ROWS][COLUMNS][STRING_LENGTH];
 
 // parser stuff
 void parse_files(
-        char* student_file,
-        char* course_file,
-        char* grade_file,
-        struct Node* root
+    char* student_file,
+    char* course_file,
+    char* grade_file,
+    struct Node* root,
+    struct Monotonic_Stack* stack
 );
 void parse_bst(char* student_file, struct Node* root);
+void parse_stack(char* course_file, struct Monotonic_Stack* stack);
 void test_parse(char* filename);
+
 
 #endif
