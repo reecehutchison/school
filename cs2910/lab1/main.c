@@ -14,10 +14,6 @@
 //  - grades (2d array... classes by list of structs that hold grade and id)
 //
 
-
-
-
-
 int debug=1; 
 
 //FILE *fp; 
@@ -40,6 +36,8 @@ int main() {
 
     fclose(fp);
 */
+
+
 
     while(1) {
 
