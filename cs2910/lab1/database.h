@@ -48,10 +48,14 @@ struct Course* create_course(
 void insert_course(struct Monotonic_Stack* stack, struct Course* new_course);
 void display_courses(struct Monotonic_Stack* stack);
 
-// 2d arr strings (eg: course_name, studentcode grade, studentcode grade...) 
-//                     course_name, studentcode grade, studentcode grade...
-typedef char stringarr[ROWS][COLUMNS][STRING_LENGTH];
-
+// grades stuff
+struct Course_Grade {
+    char course_name[STRING_LENGTH];
+    char students[99][STRING_LENGTH];
+    char grades[99][STRING_LENGTH];
+};
+struct Course_Grade* create_course_grade(char* course_name);
+void display_grades(struct Course_Grade* grades);
 
 // parser stuff
 void parse_files(
@@ -59,11 +63,13 @@ void parse_files(
     char* course_file,
     char* grade_file,
     struct Node* root,
-    struct Monotonic_Stack* stack
+    struct Monotonic_Stack* stack, 
+    struct Course_Grade* grades
 );
 void parse_bst(char* student_file, struct Node* root);
 void parse_stack(char* course_file, struct Monotonic_Stack* stack);
 void test_parse(char* filename);
+void parse_struct(char* grade_file, struct Course_Grade* grades);
 
 
 #endif

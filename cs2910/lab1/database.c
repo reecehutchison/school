@@ -1,7 +1,7 @@
 #include "database.h"
 #include <stdio.h>
 #include <ncurses.h>
-#include <stdlib.h>
+#include <stdlib.h> 
 #include <string.h>
 
 
@@ -123,15 +123,16 @@ void test_parse(char* filename) {
 }
 
 void parse_files(
-        char* student_file,
-        char* course_file,
-        char* grade_file, 
-        struct Node* root,
-        struct Monotonic_Stack* stack
+    char* student_file,
+    char* course_file,
+    char* grade_file, 
+    struct Node* root,
+    struct Monotonic_Stack* stack, 
+    struct Course_Grade* grades
 ) {
     parse_bst(student_file, root);
     parse_stack(course_file, stack);
-
+    parse_struct(grade_file, grades);
 }
 
 void parse_bst(char* student_file, struct Node* root) {
@@ -176,3 +177,49 @@ void parse_stack(char* course_file, struct Monotonic_Stack* stack) {
     } 
     fclose(file);
 }
+
+struct Course_Grade* create_course_grade(char* course_name) {
+    struct Course_Grade* new_course_grade=
+        (struct Course_Grade*)malloc(sizeof(struct Course_Grade));
+    strcpy(new_course_grade->course_name, course_name);
+    return new_course_grade;
+}
+
+void parse_struct(char* grade_file, struct Course_Grade* grades) {
+    FILE* file=fopen(grade_file, "r");
+    int n=0;
+    char line[LINE_LENGTH];
+    while(fgets(line, sizeof(line), file)&&n<99) {
+        struct Course_Grade* new_course_grade=create_course_grade("a");
+        if(!new_course_grade) {
+            fclose(file);
+            return; 
+        }
+        char* token=strtok(line, ",");
+        if(token) {
+            strcpy(new_course_grade->course_name, token);
+        }
+        int i=0;
+        while((token=strtok(NULL, ","))!=NULL&&i<99) {
+            strcpy(new_course_grade->students[i], token);
+            if((token=strtok(NULL, ","))!=NULL) {
+                strcpy(new_course_grade->grades[i], token);
+            }
+            ++i;
+        }
+        grades[n]=*new_course_grade;
+        free(new_course_grade);
+        ++n;
+    }
+    fclose(file);
+}
+
+void display_grades(struct Course_Grade* grades) {
+    for(int i=0; i<99; ++i) {
+        if(!strcmp(grades[i].course_name, ""))
+            break;
+        printw("%s ", grades[i].course_name);
+    }
+}
+
+
