@@ -22,24 +22,26 @@ int main() {
     init_ncurses();
 
     // init bst
-    struct Node* root=create_node("0", "a", "a", "a", "a");
+    struct Node* root=NULL;
 
     // init stack
     struct Monotonic_Stack s; 
     struct Monotonic_Stack* stack=&s;
     stack->size=0;
 
-    //init grades
+    // init grades
     struct Course_Grade g[99];
     struct Course_Grade* grades=g;
 
     char* student_file="student.csv";
     char* course_file="course.csv";
     char* grade_file="grades.csv";
-    parse_files(student_file, course_file, grade_file, root, stack, grades);
+    
+    // parse
+    root=parse_bst(student_file, root);
 
-    mvprintw(7, 50, "----%s-----", root->left->id);
- 
+
+    
     while(1) {
 
     display_ui();
@@ -54,17 +56,12 @@ int main() {
     if(ch=='q')
         break;
 
-    if(ch=='1') 
-        display_tree(root, 7);
-
-    if(ch=='2') 
-        display_students_in_order(root, 7);
-    
-    if(ch=='3')
-        display_students_in_order_reverse(root, 7);
-
+    if(ch=='1') {
+        int index=7;
+        display_tree(root, &index);
     }
 
+    }
 
     endwin();
 

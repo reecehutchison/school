@@ -55,21 +55,23 @@ struct Node* insert_node(struct Node* root, struct Node* new_node) {
     return root;
 }
 
-void display_tree(struct Node* root, int i) {
+void display_tree(struct Node* root, int* i) {
     if(root==NULL)
         return; 
-    display_tree(root->left, i+1);
+    display_tree(root->left, i);
     //printing logic
-    if(strcmp(root->id, "0")) {
-    mvprintw(i, 40, "%s, %s, %s, %s, %s", 
+    
+    mvprintw(*i, 40, "%s, %s, %s, %s, %s", 
             root->id, 
-            root->first_name, 
-            root->last_name, 
+            root->first_name,
+            root->last_name,
             root->phone_number, 
             root->email);
-    }
+    ++(*i);
+
+
     //
-    display_tree(root->right, i+1);
+    display_tree(root->right, i);
     return;
 }
 
@@ -131,41 +133,28 @@ void test_parse(char* filename) {
     }
 }
 
-void parse_files(
-    char* student_file,
-    char* course_file,
-    char* grade_file, 
-    struct Node* root,
-    struct Monotonic_Stack* stack, 
-    struct Course_Grade* grades
-) {
-    parse_bst(student_file, root);
-    parse_stack(course_file, stack);
-    parse_struct(grade_file, grades);
-}
+struct Node* parse_bst(char* student_file, struct Node* root) {
+     FILE* file = fopen(student_file, "r");
+  
+char line[LINE_LENGTH];
+    while (fgets(line, sizeof(line), file)) {
+        struct Node* new_node = create_node("a", "a", "a", "a", "a");
+        char* token = strtok(line, ",");
+        if (token) strcpy(new_node->id, token); 
+        token = strtok(NULL, ",");  
+        if (token) strcpy(new_node->last_name, token);
+        token = strtok(NULL, ","); 
+        if (token) strcpy(new_node->first_name, token);  
+        token = strtok(NULL, ","); 
+        if (token) strcpy(new_node->phone_number, token);
+        token = strtok(NULL, ","); 
+        if (token) strcpy(new_node->email, token);
 
-void parse_bst(char* student_file, struct Node* root) {
-    FILE* file; 
+        root = insert_node(root, new_node);  // Update root
+    }
 
-    file=fopen(student_file, "r");
-    while (!feof(file)) {
-        char line[LINE_LENGTH];
-        while(fgets(line, sizeof(line), file)) {
-            struct Node* new_node=create_node("a", "a", "a", "a", "a");
-            char* token=strtok(line, ",");
-            strcpy(new_node->id, token); 
-            token=strtok(NULL, ",");  
-            strcpy(new_node->last_name, token);
-            token=strtok(NULL, ","); 
-            strcpy(new_node->first_name, token);  
-            token=strtok(NULL, ","); 
-            strcpy(new_node->phone_number, token);
-            token=strtok(NULL, ","); 
-            strcpy(new_node->email, token);
-            insert_node(root, new_node);
-        }
-    } 
     fclose(file);
+    return root;
 }
 
 void parse_stack(char* course_file, struct Monotonic_Stack* stack) {
@@ -254,8 +243,6 @@ void display_ui() {
     mvprintw(6, 0, "---------");
     mvprintw(7, 1, "(q) quit");
     mvprintw(8, 1, "(1) display list of all students");
-    mvprintw(9, 1, "(2) students sorted by name"); 
-    mvprintw(10, 1, "(3) students reverse order");
 }
 
 void display_students_in_order(struct Node* root, int i) {
