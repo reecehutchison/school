@@ -39,6 +39,7 @@ int main() {
     
     // parse
     root=parse_bst(student_file, root);
+    parse_stack(course_file, stack);
 
 
     
@@ -55,7 +56,6 @@ int main() {
 
     if(ch=='q')
         break;
-
     if(ch=='1') {
         int index=7;
         display_tree(root, &index);
@@ -68,6 +68,8 @@ int main() {
         int index=7;
         display_students_in_order_reverse(root, &index);
     }
+    if(ch=='3')
+        display_courses(stack);
 
      
 

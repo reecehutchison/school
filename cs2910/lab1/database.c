@@ -71,9 +71,6 @@ void display_tree(struct Node* root, int* i) {
             root->phone_number, 
             root->email);
     ++(*i);
-
-
-    //
     display_tree(root->right, i);
     return;
 }
@@ -115,11 +112,14 @@ void insert_course(struct Monotonic_Stack* stack, struct Course* new_course) {
 }
 
 void display_courses(struct Monotonic_Stack* stack) { 
-    for(int i=0; i<stack->size; ++i)
-       mvprintw(8+i, 40, "%s, %s, %s", 
-               stack->courses[i]->name, 
-               stack->courses[i]->code,
-               stack->courses[i]->semester);
+    mvprintw(4, 40, "name, code, semester");
+    mvprintw(5, 40, "--------------------");
+    for(int i=0; i<stack->size; ++i) {
+        mvprintw(8+i, 40, "%s, %s, %s", 
+                stack->courses[i]->name, 
+                stack->courses[i]->code,
+                stack->courses[i]->semester);
+        }
     return;
 }
 
@@ -137,25 +137,22 @@ void test_parse(char* filename) {
 }
 
 struct Node* parse_bst(char* student_file, struct Node* root) {
-     FILE* file = fopen(student_file, "r");
-  
-char line[LINE_LENGTH];
-    while (fgets(line, sizeof(line), file)) {
-        struct Node* new_node = create_node("a", "a", "a", "a", "a");
-        char* token = strtok(line, ",");
-        if (token) strcpy(new_node->id, token); 
-        token = strtok(NULL, ",");  
-        if (token) strcpy(new_node->last_name, token);
-        token = strtok(NULL, ","); 
-        if (token) strcpy(new_node->first_name, token);  
-        token = strtok(NULL, ","); 
-        if (token) strcpy(new_node->phone_number, token);
-        token = strtok(NULL, ","); 
-        if (token) strcpy(new_node->email, token);
-
-        root = insert_node(root, new_node);  // Update root
+    FILE* file=fopen(student_file, "r");
+    char line[LINE_LENGTH];
+        while(fgets(line, sizeof(line), file)) {
+            struct Node* new_node=create_node("a", "a", "a", "a", "a");
+            char* token=strtok(line, ",");
+            if(token)strcpy(new_node->id, token); 
+            token=strtok(NULL, ",");  
+            if(token)strcpy(new_node->last_name, token);
+            token=strtok(NULL, ","); 
+            if(token)strcpy(new_node->first_name, token);  
+            token=strtok(NULL, ","); 
+            if(token)strcpy(new_node->phone_number, token);
+            token=strtok(NULL, ","); 
+            if(token)strcpy(new_node->email, token);
+            root=insert_node(root, new_node);  
     }
-
     fclose(file);
     return root;
 }
@@ -248,6 +245,7 @@ void display_ui() {
     mvprintw(8, 1, "(1) display list of all students");
     mvprintw(9, 1, "(2) students sorted by name");
     mvprintw(10, 1, "(r) students by name reversed");
+    mvprintw(11, 1, "(3) list of all courses");
 }
 
 void display_students_in_order(struct Node* root, int* i) { 
