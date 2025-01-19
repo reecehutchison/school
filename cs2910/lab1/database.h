@@ -65,8 +65,8 @@ void parse_struct(char* grade_file, struct Course_Grade* grades);
 
 // ui 
 void display_ui(); 
-void display_students_in_order(struct Node* root, int i); 
-void display_students_in_order_reverse(struct Node* root, int i); 
+void display_students_in_order(struct Node* root, int* i); 
+void display_students_in_order_reverse(struct Node* root, int* i); 
 
 
 

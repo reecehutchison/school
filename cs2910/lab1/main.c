@@ -60,6 +60,16 @@ int main() {
         int index=7;
         display_tree(root, &index);
     }
+    if(ch=='2') {
+        int index=7; 
+        display_students_in_order(root, &index);
+    }
+    if(ch=='r') {
+        int index=7;
+        display_students_in_order_reverse(root, &index);
+    }
+
+     
 
     }
 

@@ -56,6 +56,9 @@ struct Node* insert_node(struct Node* root, struct Node* new_node) {
 }
 
 void display_tree(struct Node* root, int* i) {
+    mvprintw(4, 40, "id, first name, last name, phone number, email");
+    mvprintw(5, 40, "----------------------------------------------");
+
     if(root==NULL)
         return; 
     display_tree(root->left, i);
@@ -243,37 +246,39 @@ void display_ui() {
     mvprintw(6, 0, "---------");
     mvprintw(7, 1, "(q) quit");
     mvprintw(8, 1, "(1) display list of all students");
+    mvprintw(9, 1, "(2) students sorted by name");
+    mvprintw(10, 1, "(r) students by name reversed");
 }
 
-void display_students_in_order(struct Node* root, int i) {
+void display_students_in_order(struct Node* root, int* i) { 
+    mvprintw(4, 40, "first name, last name");
+    mvprintw(5, 40, "---------------------");
     if(root==NULL)
         return; 
+    display_students_in_order(root->left, i);
     //printing logic
-    if(strcmp(root->id, "0")) {
-    mvprintw(i, 40,"%s, %s", 
-            root->first_name, 
-            root->last_name
-            );
-    }
+    mvprintw(*i, 40, "%s, %s", 
+            root->first_name,
+            root->last_name);
+    ++(*i);
     //
-    display_students_in_order(root->left, i+1);
-    display_students_in_order(root->right, i+1);
+    display_students_in_order(root->right, i);
     return;
 }
 
-void display_students_in_order_reverse(struct Node* root, int i) {
+void display_students_in_order_reverse(struct Node* root, int* i) {  
+    mvprintw(4, 40, "first name, last name");
+    mvprintw(5, 40, "---------------------");
     if(root==NULL)
         return; 
+    display_students_in_order_reverse(root->right, i);
     //printing logic
-    if(strcmp(root->id, "0")) {
-    mvprintw(i, 40,"%s, %s", 
-            root->first_name, 
-            root->last_name
-            );
-    }
+    mvprintw(*i, 40, "%s, %s", 
+            root->first_name,
+            root->last_name);
+    ++(*i);
     //
-    display_students_in_order_reverse(root->right, i+1);
-    display_students_in_order_reverse(root->left, i+1);
+    display_students_in_order_reverse(root->left, i);
     return;
 }
 
