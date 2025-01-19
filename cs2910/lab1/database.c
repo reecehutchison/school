@@ -241,7 +241,7 @@ void display_ui() {
     mvprintw(2, 3, "-- Database Program --"); 
     mvprintw(5, 1, "Options");
     mvprintw(6, 0, "---------");
-    mvprintw(7, 1, "(q) quit");
+    mvprintw(7, 1, "(q) quit (note: reset after appends)");
     mvprintw(8, 1, "(1) display list of all students");
     mvprintw(9, 1, "(2) students sorted by name");
     mvprintw(10, 1, "(r) students by name reversed");
@@ -249,6 +249,7 @@ void display_ui() {
     mvprintw(12, 1, "(4) list all fall courses");
     mvprintw(13, 1, "(5) list all winter courses");
     mvprintw(14, 1, "(s) list all spring courses");
+    mvprintw(15, 1, "(6) add student");
 }
 
 void display_students_in_order(struct Node* root, int* i) { 
@@ -327,7 +328,52 @@ void display_courses_spring(struct Monotonic_Stack* stack) {
     return;
 }
 
+void add_student(char* student_file) {
+    char id[STRING_LENGTH];
+    char first_name[STRING_LENGTH];
+    char last_name[STRING_LENGTH];
+    char phone_number[STRING_LENGTH];
+    char email[STRING_LENGTH];
+    char input[STRING_LENGTH];
 
+    curs_set(1);
+    echo();
+
+    mvprintw(1, 10, "enter student id: ");
+    refresh();
+    getstr(input);
+    strcpy(id, input);
+
+    mvprintw(2, 10, "enter first name: ");
+    refresh();
+    getstr(input);
+    strcpy(first_name, input);
+
+    mvprintw(3, 10, "enter last mame: ");
+    refresh();
+    getstr(input);
+    strcpy(last_name, input);
+
+    mvprintw(4, 10, "enter phone number: ");
+    refresh();
+    getstr(input);
+    strcpy(phone_number, input);
+
+    mvprintw(5, 10, "enter email: ");
+    refresh();
+    getstr(input);
+    strcpy(email, input);
+
+    FILE* file=fopen(student_file, "a");  
+    fprintf(file, "%s, %s, %s, %s, %s\n", id, last_name, first_name, phone_number, email);
+    fclose(file);
+    mvprintw(7, 10, "student data saved successfully");
+    refresh();
+    getch();  
+    clear();
+    curs_set(0);
+    noecho();
+}
 
 
 

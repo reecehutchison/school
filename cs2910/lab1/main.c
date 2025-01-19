@@ -76,6 +76,8 @@ int main() {
         display_courses_winter(stack);
     if(ch=='s')
         display_courses_spring(stack);
+    if(ch=='6') 
+        add_student(student_file);
 
     }
 
