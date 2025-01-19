@@ -78,6 +78,8 @@ int main() {
         display_courses_spring(stack);
     if(ch=='6') 
         add_student(student_file);
+    if(ch=='c')
+        add_course(course_file);
 
     }
 

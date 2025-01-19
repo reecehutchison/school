@@ -249,7 +249,8 @@ void display_ui() {
     mvprintw(12, 1, "(4) list all fall courses");
     mvprintw(13, 1, "(5) list all winter courses");
     mvprintw(14, 1, "(s) list all spring courses");
-    mvprintw(15, 1, "(6) add student");
+    mvprintw(15, 1, "(6) add student to db");
+    mvprintw(16, 1, "(c) add course to db");
 }
 
 void display_students_in_order(struct Node* root, int* i) { 
@@ -367,13 +368,53 @@ void add_student(char* student_file) {
     FILE* file=fopen(student_file, "a");  
     fprintf(file, "%s, %s, %s, %s, %s\n", id, last_name, first_name, phone_number, email);
     fclose(file);
-    mvprintw(7, 10, "student data saved successfully");
+    mvprintw(7, 10, "student data saved");
     refresh();
     getch();  
     clear();
     curs_set(0);
     noecho();
 }
+
+void add_course(char* course_file) {
+    char name[STRING_LENGTH];
+    char code[STRING_LENGTH];
+    char semester[STRING_LENGTH];
+    char input[STRING_LENGTH];
+
+    curs_set(1);
+    echo();
+
+    mvprintw(1, 10, "enter course name: ");
+    refresh();
+    getstr(input);
+    strcpy(name, input);
+
+    mvprintw(2, 10, "enter code for course: ");
+    refresh();
+    getstr(input);
+    strcpy(code, input);
+
+    mvprintw(3, 10, "enter semester: ");
+    refresh();
+    getstr(input);
+    strcpy(semester, input);
+
+
+    FILE* file=fopen(course_file, "a");  
+    fprintf(file, "%s, %s, %s\n", name, code, semester);
+    fclose(file);
+    mvprintw(7, 10, "course data saved");
+    refresh();
+    getch();  
+    clear();
+    curs_set(0);
+    noecho();
+}
+
+
+
+
 
 
 
