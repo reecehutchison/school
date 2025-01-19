@@ -246,6 +246,9 @@ void display_ui() {
     mvprintw(9, 1, "(2) students sorted by name");
     mvprintw(10, 1, "(r) students by name reversed");
     mvprintw(11, 1, "(3) list of all courses");
+    mvprintw(12, 1, "(4) list all fall courses");
+    mvprintw(13, 1, "(5) list all winter courses");
+    mvprintw(14, 1, "(s) list all spring courses");
 }
 
 void display_students_in_order(struct Node* root, int* i) { 
@@ -277,6 +280,50 @@ void display_students_in_order_reverse(struct Node* root, int* i) {
     ++(*i);
     //
     display_students_in_order_reverse(root->left, i);
+    return;
+}
+
+void display_courses_fall(struct Monotonic_Stack* stack) {
+    mvprintw(4, 40, "name, code --> (fall courses)");
+    mvprintw(5, 40, "-----------------------------");
+    int j=0; 
+    for(int i=0; i<stack->size; ++i) {
+        if(strcmp(stack->courses[i]->semester, " fall\n")==0) {
+            mvprintw(8+j, 40, "%s, %s", 
+                stack->courses[i]->name, 
+                stack->courses[i]->code);
+            ++j;  
+        }
+    }
+    return;
+}
+
+void display_courses_winter(struct Monotonic_Stack* stack) {
+    mvprintw(4, 40, "name, code --> (winter courses)");
+    mvprintw(5, 40, "------------------------------");
+    int j=0; 
+    for(int i=0; i<stack->size; ++i) {
+        if(strcmp(stack->courses[i]->semester, " winter\n")==0) {
+            mvprintw(8+j, 40, "%s, %s", 
+                stack->courses[i]->name, 
+                stack->courses[i]->code);
+            ++j;  
+        }
+    }
+    return;
+}
+void display_courses_spring(struct Monotonic_Stack* stack) {
+    mvprintw(4, 40, "name, code --> (spring courses)");
+    mvprintw(5, 40, "-------------------------------");
+    int j=0; 
+    for(int i=0; i<stack->size; ++i) {
+        if(strcmp(stack->courses[i]->semester, " spring\n")==0) {
+            mvprintw(8+j, 40, "%s, %s", 
+                stack->courses[i]->name, 
+                stack->courses[i]->code);
+            ++j;  
+        }
+    }
     return;
 }
 

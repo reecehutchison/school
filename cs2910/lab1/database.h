@@ -47,6 +47,9 @@ struct Course* create_course(
 );
 void insert_course(struct Monotonic_Stack* stack, struct Course* new_course);
 void display_courses(struct Monotonic_Stack* stack);
+void display_courses_fall(struct Monotonic_Stack* stack);
+void display_courses_winter(struct Monotonic_Stack* stack);
+void display_courses_spring(struct Monotonic_Stack* stack);
 
 // grades stuff
 struct Course_Grade {

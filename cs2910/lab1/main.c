@@ -70,8 +70,12 @@ int main() {
     }
     if(ch=='3')
         display_courses(stack);
-
-     
+    if(ch=='4')     
+        display_courses_fall(stack);
+    if(ch=='5')
+        display_courses_winter(stack);
+    if(ch=='s')
+        display_courses_spring(stack);
 
     }
 
