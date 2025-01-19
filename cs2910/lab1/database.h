@@ -28,7 +28,7 @@ struct Node* create_node(
     char email[STRING_LENGTH]
 );
 struct Node* insert_node(struct Node* root, struct Node* new_node);
-void display_tree(struct Node* root); 
+void display_tree(struct Node* root, int i); 
 
 // array for classes 
 struct Course {
@@ -70,6 +70,12 @@ void parse_bst(char* student_file, struct Node* root);
 void parse_stack(char* course_file, struct Monotonic_Stack* stack);
 void test_parse(char* filename);
 void parse_struct(char* grade_file, struct Course_Grade* grades);
+
+// ui 
+void display_ui(); 
+void display_students_in_order(struct Node* root, int i); 
+void display_students_in_order_reverse(struct Node* root, int i); 
+
 
 
 #endif

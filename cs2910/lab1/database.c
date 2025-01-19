@@ -48,22 +48,28 @@ struct Node* create_node(
 struct Node* insert_node(struct Node* root, struct Node* new_node) { 
     if(root==NULL) 
         return new_node; 
-
-    if(atoi(new_node->id)<atoi(root->id))
+    if(strcmp(new_node->first_name, root->first_name)<0)
         root->left=insert_node(root->left, new_node);  
     else
         root->right=insert_node(root->right, new_node);  
     return root;
 }
 
-void display_tree(struct Node* root) {
+void display_tree(struct Node* root, int i) {
     if(root==NULL)
         return; 
+    display_tree(root->left, i+1);
     //printing logic
-    printw("%s ", root->id);
+    if(strcmp(root->id, "0")) {
+    mvprintw(i, 40, "%s, %s, %s, %s, %s", 
+            root->id, 
+            root->first_name, 
+            root->last_name, 
+            root->phone_number, 
+            root->email);
+    }
     //
-    display_tree(root->left);
-    display_tree(root->right);
+    display_tree(root->right, i+1);
     return;
 }
 
@@ -105,7 +111,10 @@ void insert_course(struct Monotonic_Stack* stack, struct Course* new_course) {
 
 void display_courses(struct Monotonic_Stack* stack) { 
     for(int i=0; i<stack->size; ++i)
-       printw("%s ", stack->courses[i]);
+       mvprintw(8+i, 40, "%s, %s, %s", 
+               stack->courses[i]->name, 
+               stack->courses[i]->code,
+               stack->courses[i]->semester);
     return;
 }
 
@@ -214,12 +223,74 @@ void parse_struct(char* grade_file, struct Course_Grade* grades) {
     fclose(file);
 }
 
+// this shit does not work ...
 void display_grades(struct Course_Grade* grades) {
     for(int i=0; i<99; ++i) {
         if(!strcmp(grades[i].course_name, ""))
             break;
-        printw("%s ", grades[i].course_name);
+        mvprintw(7, 40+(i*12), "%s", grades[i].course_name);
+    }
+    for(int i=0; i<99; ++i) {
+        if(!strcmp(grades[i].course_name, ""))
+            break;
+        mvprintw(8, 40+(i*12), "---------");
+    }
+    for(int i=0; i<99; ++i) {  
+        if(!strcmp(grades[i].course_name, ""))
+            break;
+        for(int j=0; j<99; ++j) {
+            if(strcmp(grades[i].grades[j], ""))
+                break;
+            mvprintw(8+j, 40+(i*12), "");
+            printw(grades[i].students[j]);
+            printw(" %s", grades[i].students[j]);
+        }
     }
 }
+
+void display_ui() {
+    mvprintw(2, 3, "-- Database Program --"); 
+    mvprintw(5, 1, "Options");
+    mvprintw(6, 0, "---------");
+    mvprintw(7, 1, "(q) quit");
+    mvprintw(8, 1, "(1) display list of all students");
+    mvprintw(9, 1, "(2) students sorted by name"); 
+    mvprintw(10, 1, "(3) students reverse order");
+}
+
+void display_students_in_order(struct Node* root, int i) {
+    if(root==NULL)
+        return; 
+    //printing logic
+    if(strcmp(root->id, "0")) {
+    mvprintw(i, 40,"%s, %s", 
+            root->first_name, 
+            root->last_name
+            );
+    }
+    //
+    display_students_in_order(root->left, i+1);
+    display_students_in_order(root->right, i+1);
+    return;
+}
+
+void display_students_in_order_reverse(struct Node* root, int i) {
+    if(root==NULL)
+        return; 
+    //printing logic
+    if(strcmp(root->id, "0")) {
+    mvprintw(i, 40,"%s, %s", 
+            root->first_name, 
+            root->last_name
+            );
+    }
+    //
+    display_students_in_order_reverse(root->right, i+1);
+    display_students_in_order_reverse(root->left, i+1);
+    return;
+}
+
+
+
 
 
