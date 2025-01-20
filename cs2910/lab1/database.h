@@ -75,5 +75,7 @@ void display_students_in_order_reverse(struct Node* root, int* i);
 void add_student(char* student_file);
 void add_course(char* course_file);
 
+// search stuff
+void search_course_by_name(struct Monotonic_Stack* stack); 
 
 #endif

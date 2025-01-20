@@ -84,6 +84,9 @@ int main() {
         add_student(student_file);
     if(ch=='c')
         add_course(course_file);
+    // 7 goes here
+    if(ch=='8')
+        search_course_by_name(stack);
 
     }
 

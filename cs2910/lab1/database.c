@@ -251,6 +251,8 @@ void display_ui() {
     mvprintw(14, 1, "(s) list all spring courses");
     mvprintw(15, 1, "(6) add student to db");
     mvprintw(16, 1, "(c) add course to db");
+    // seven goes here !!! 
+    mvprintw(17, 1, "(8) search for course by name");
 }
 
 void display_students_in_order(struct Node* root, int* i) { 
@@ -368,7 +370,7 @@ void add_student(char* student_file) {
     FILE* file=fopen(student_file, "a");  
     fprintf(file, "%s, %s, %s, %s, %s\n", id, last_name, first_name, phone_number, email);
     fclose(file);
-    mvprintw(7, 10, "student data saved");
+    mvprintw(7, 10, "student data saved, press any button to exit");
     refresh();
     getch();  
     clear();
@@ -404,7 +406,7 @@ void add_course(char* course_file) {
     FILE* file=fopen(course_file, "a");  
     fprintf(file, "%s, %s, %s\n", name, code, semester);
     fclose(file);
-    mvprintw(7, 10, "course data saved");
+    mvprintw(7, 10, "course data saved, press any button to exit");
     refresh();
     getch();  
     clear();
@@ -412,7 +414,32 @@ void add_course(char* course_file) {
     noecho();
 }
 
+void search_course_by_name(struct Monotonic_Stack* stack) {  
+    char input[STRING_LENGTH];
 
+    curs_set(1);
+    echo();
+
+
+    mvprintw(1, 10, "enter course name: ");
+    refresh();
+    getstr(input);
+
+    for(int i=0; i<99; ++i) {
+        if(strcmp(stack->courses[i]->name, input)==0) {
+            mvprintw(3, 10, "course code: %s", stack->courses[i]->code);
+            mvprintw(4, 10, "course semester: %s", stack->courses[i]->semester);
+            mvprintw(8, 10, "(press any button to exit)");
+
+            refresh();
+            getch();  
+            clear();
+            curs_set(0);
+            noecho();
+            break;
+        }
+    }
+}
 
 
 
