@@ -12,7 +12,11 @@
 //  - grades (array of structs, has name, and two arrays one for student id, 
 //  and one for grades, then they match indexs)
 //  - do ui
-
+//
+//
+//  to do -- 
+//  - LAST: the update stuff, so 6 (grades), and 7...
+ 
 int debug=1; 
 
 int main() {
