@@ -253,6 +253,7 @@ void display_ui() {
     mvprintw(16, 1, "(c) add course to db");
     // seven goes here !!! 
     mvprintw(17, 1, "(8) search for course by name");
+    mvprintw(18, 1, "(9) search for course by code");
 }
 
 void display_students_in_order(struct Node* root, int* i) { 
@@ -416,17 +417,15 @@ void add_course(char* course_file) {
 
 void search_course_by_name(struct Monotonic_Stack* stack) {  
     char input[STRING_LENGTH];
-
     curs_set(1);
     echo();
-
 
     mvprintw(1, 10, "enter course name: ");
     refresh();
     getstr(input);
 
     for(int i=0; i<99; ++i) {
-        if(strcmp(stack->courses[i]->name, input)==0) {
+        if(stack->courses[i]!=NULL&&strcmp(stack->courses[i]->name, input)==0) {
             mvprintw(3, 10, "course code: %s", stack->courses[i]->code);
             mvprintw(4, 10, "course semester: %s", stack->courses[i]->semester);
             mvprintw(8, 10, "(press any button to exit)");
@@ -438,10 +437,60 @@ void search_course_by_name(struct Monotonic_Stack* stack) {
             noecho();
             break;
         }
+
+        if(i>80) {
+            mvprintw(8, 10, "(course not found, press any button to exit)");
+
+            refresh();
+            getch();  
+            clear();
+            curs_set(0);
+            noecho();
+            break;
+        }
+
     }
 }
 
+void search_course_by_code(struct Monotonic_Stack* stack) {
 
+    char input[STRING_LENGTH]; 
+    char str[STRING_LENGTH]=" ";
+
+    curs_set(1);
+    echo();
+
+    mvprintw(1, 10, "enter course code: ");
+    refresh();
+    getstr(input);
+    strcat(str, input);
+
+
+    for(int i=0; i<98; ++i) {
+        if(stack->courses[i]!=NULL&&strcmp(stack->courses[i]->code, str)==0) {
+            mvprintw(3, 10, "course name: %s", stack->courses[i]->name);
+            mvprintw(4, 10, "course semester: %s", stack->courses[i]->semester);
+            mvprintw(8, 10, "(press any button to exit)");
+
+            refresh();
+            getch();  
+            clear();
+            curs_set(0);
+            noecho();
+            break;
+        }
+        if(i>80) {
+            mvprintw(8, 10, "(course not found, press any button to exit)");
+
+            refresh();
+            getch();  
+            clear();
+            curs_set(0);
+            noecho();
+            break;
+        }
+    }
+}
 
 
 

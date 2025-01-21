@@ -87,6 +87,8 @@ int main() {
     // 7 goes here
     if(ch=='8')
         search_course_by_name(stack);
+    if(ch=='9')
+        search_course_by_code(stack);
 
     }
 

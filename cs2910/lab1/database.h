@@ -77,5 +77,6 @@ void add_course(char* course_file);
 
 // search stuff
 void search_course_by_name(struct Monotonic_Stack* stack); 
+void search_course_by_code(struct Monotonic_Stack* stack);
 
 #endif
