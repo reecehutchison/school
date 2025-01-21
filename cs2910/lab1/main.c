@@ -89,6 +89,9 @@ int main() {
         search_course_by_name(stack);
     if(ch=='9')
         search_course_by_code(stack);
+    if(ch=='z') 
+        search_for_student_last_name(root);
+
 
     }
 

@@ -78,5 +78,7 @@ void add_course(char* course_file);
 // search stuff
 void search_course_by_name(struct Monotonic_Stack* stack); 
 void search_course_by_code(struct Monotonic_Stack* stack);
+void search_for_student_last_name(struct Node* root);
+void dfs_student_last_name(char* last_name, struct Node* root, int* found);
 
 #endif
