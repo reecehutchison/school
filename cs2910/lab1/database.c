@@ -188,8 +188,10 @@ void parse_struct(char* grade_file, struct Course_Grade* grades) {
     FILE* file=fopen(grade_file, "r");
     int n=0;
     char line[LINE_LENGTH];
+    struct Course_Grade* new_course_grade=create_course_grade("a");
     while(fgets(line, sizeof(line), file)&&n<99) {
-        struct Course_Grade* new_course_grade=create_course_grade("a");
+        line[strcspn(line, "\n")] = 0;
+        memset(new_course_grade, 0, sizeof(struct Course_Grade));
         if(!new_course_grade) {
             fclose(file);
             return; 
@@ -207,9 +209,9 @@ void parse_struct(char* grade_file, struct Course_Grade* grades) {
             ++i;
         }
         grades[n]=*new_course_grade;
-        free(new_course_grade);
         ++n;
     }
+    free(new_course_grade);
     fclose(file);
 }
 

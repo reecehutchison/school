@@ -16,6 +16,8 @@
 //
 //  to do -- 
 //  - LAST: the update stuff, so 6 (grades), and 7...
+//  - 12 is messed up it has this bug, but it is because of 
+//      parsing error i think!!!
  
 int debug=1; 
 
@@ -46,7 +48,7 @@ int main() {
     parse_stack(course_file, stack);
     parse_struct(grade_file, grades);
 
-    
+
     while(1) {
 
     display_ui();
