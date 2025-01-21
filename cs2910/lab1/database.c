@@ -235,6 +235,7 @@ void display_ui() {
     mvprintw(19, 1, "(z) search for student by last name");
     mvprintw(20, 1, "(x) search for student by phone");
     mvprintw(21, 1, "(v) list all students courses taken");
+    mvprintw(22, 1, "(b) list student average");
 }
 
 void display_students_in_order(struct Node* root, int* i) { 
@@ -567,11 +568,6 @@ void dfs_student_phone(char* phone, struct Node* root, int* found) {
 }
 
 void list_student_courses(struct Course_Grade* grades) {
-/*
-    mvprintw(20, 40, "-------%s-------", grades[40].course_name);
-    mvprintw(21, 40, "------%s-----", grades[0].students[0]);
-    mvprintw(22, 40, "------%s-----", grades[0].grades[0]); 
-*/
 
     char input[STRING_LENGTH];
     char str[STRING_LENGTH]=" ";
@@ -602,13 +598,54 @@ void list_student_courses(struct Course_Grade* grades) {
             }
         }
     }
+    mvprintw(15, 45, "(press any button to exit)");
 
     refresh();
     getch();  
     clear();
-   
+
+    curs_set(0);
+    noecho();
 }
 
+void list_student_average(struct Course_Grade* grades) {
+    char input[STRING_LENGTH];
+    char str[STRING_LENGTH]=" ";
+
+    float sum=0; 
+    float total=0;
+
+    curs_set(1);
+    echo();
+
+    mvprintw(1, 10, "enter student last name: ");
+    refresh();
+    getstr(input);
+    strcat(str, input);
+
+
+    for(int i=0; i<80; ++i) {
+        if(strcmp(grades[i].course_name, "")==0)
+            break;
+        for(int j=0; j<80; ++j) {
+            if(strcmp(grades[i].students[j], "")==0) 
+                break;
+            if(strcmp(grades[i].students[j], str)==0)  {
+                sum+=atoi(grades[i].grades[j]); 
+                ++total;
+            }
+        }
+    }
+    mvprintw(3, 10, "student average grade: %.2f", (sum/total));
+    mvprintw(7, 10, "(press any button to exit)");
+
+    refresh();
+    getch();  
+    clear();
+ 
+    curs_set(0);
+    noecho();
+}
 
 
 

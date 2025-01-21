@@ -16,9 +16,9 @@
 //
 //  to do -- 
 //  - LAST: the update stuff, so 6 (grades), and 7...
-//  - 12 is messed up it has this bug, but it is because of 
-//      parsing error i think!!!
- 
+//
+//
+//
 int debug=1; 
 
 int main() {
@@ -97,6 +97,8 @@ int main() {
         search_for_student_phone(root);
     if(ch=='v')
         list_student_courses(grades);
+    if(ch=='b')
+        list_student_average(grades);
 
 
     }
