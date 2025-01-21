@@ -598,7 +598,8 @@ void list_student_courses(struct Course_Grade* grades) {
             }
         }
     }
-    mvprintw(15, 45, "(press any button to exit)");
+    mvprintw(15, 45, "(press any button to exit.)");
+    mvprintw(16, 45, "(if no results, student not found or has taken no classes)");
 
     refresh();
     getch();  
@@ -637,7 +638,7 @@ void list_student_average(struct Course_Grade* grades) {
         }
     }
     mvprintw(3, 10, "student average grade: %.2f", (sum/total));
-    mvprintw(7, 10, "(press any button to exit)");
+    mvprintw(7, 10, "(press any button to exit. if result is nan, student not found)");
 
     refresh();
     getch();  
