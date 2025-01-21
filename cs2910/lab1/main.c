@@ -5,17 +5,11 @@
 
 #define STUDENT_FILE "student.data"
 
-// plan!
-//  - parsing (do this after data structures)
-//  - students (binary search tree, sort by id)
-//  - courses (monotonic stack (with random access), sorted alphabetically)
-//  - grades (array of structs, has name, and two arrays one for student id, 
-//  and one for grades, then they match indexs)
-//  - do ui
 //
 //
 //  to do -- 
 //  - LAST: the update stuff, so 6 (grades), and 7...
+//  - 15 - this one looks tough
 //
 //
 //
