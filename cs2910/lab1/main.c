@@ -8,12 +8,6 @@
 //
 //
 //  to do -- 
-//  - 7 -- the update student one
-//  1. write a search for student / update the current node
-//  2. write a traverse tree and clear and rewrite all the info from the file
-//
-//
-//
 //  - 15 -- the print average for specific sem one...
 //
 
