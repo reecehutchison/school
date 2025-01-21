@@ -74,6 +74,7 @@ void display_students_in_order_reverse(struct Node* root, int* i);
 // append stuff
 void add_student(char* student_file);
 void add_course(char* course_file);
+void add_grade(char* grade_file);
 
 // search stuff
 void search_course_by_name(struct Monotonic_Stack* stack); 
@@ -88,6 +89,16 @@ void list_student_courses(struct Course_Grade* grades);
 void list_student_average(struct Course_Grade* grades);
 void list_class_average(struct Course_Grade* grades);
 
-
+// update student stuff
+void update_student_info(struct Node* root, char* student_file);
+void update_tree_info(
+        struct Node* root,
+        char* student_file,
+        char* id,
+        char* first_name, 
+        char* last_name,
+        char* phone_number, 
+        char* email);
+void write_bst_to_file(struct Node* root, char* student_file);
 
 #endif

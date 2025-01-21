@@ -8,9 +8,13 @@
 //
 //
 //  to do -- 
-//  - LAST: the update stuff, so 6 (grades), and 7...
-//  - 15 - this one looks tough
-//  -- explore making a new parsing function for grades, for better appending!
+//  - 7 -- the update student one
+//  1. write a search for student / update the current node
+//  2. write a traverse tree and clear and rewrite all the info from the file
+//
+//
+//
+//  - 15 -- the print average for specific sem one...
 //
 
 int debug=1; 
@@ -95,6 +99,10 @@ int main() {
         list_student_average(grades);
     if(ch=='n')
         list_class_average(grades);
+    if(ch=='a')
+        add_grade(grade_file);
+    if(ch=='u')
+        update_student_info(root, student_file);
 
 
     }

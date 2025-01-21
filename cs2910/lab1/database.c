@@ -20,7 +20,7 @@ void init_ncurses() {
 }
 
 void display_debug_info(int ch) {
-    mvprintw(27, 3, "key: %c",ch);
+    mvprintw(31, 3, "key: %c",ch);
     return;
 }
 
@@ -140,6 +140,7 @@ struct Node* parse_bst(char* student_file, struct Node* root) {
     FILE* file=fopen(student_file, "r");
     char line[LINE_LENGTH];
         while(fgets(line, sizeof(line), file)) {
+            line[strcspn(line, "\n")] = 0; 
             struct Node* new_node=create_node("a", "a", "a", "a", "a");
             char* token=strtok(line, ",");
             if(token)strcpy(new_node->id, token); 
@@ -272,14 +273,15 @@ void display_ui() {
     mvprintw(14, 1, "(s) list all spring courses");
     mvprintw(15, 1, "(6) add student to db");
     mvprintw(16, 1, "(c) add course to db");
-    // seven goes here !!! 
-    mvprintw(17, 1, "(8) search for course by name");
-    mvprintw(18, 1, "(9) search for course by code");
-    mvprintw(19, 1, "(z) search for student by last name");
-    mvprintw(20, 1, "(x) search for student by phone");
-    mvprintw(21, 1, "(v) list all students courses taken");
-    mvprintw(22, 1, "(b) list student average");
-    mvprintw(23, 1, "(n) list class average");
+    mvprintw(17, 1, "(a) add grade to db");
+    mvprintw(18, 1, "(u) update student info");
+    mvprintw(19, 1, "(8) search for course by name");
+    mvprintw(20, 1, "(9) search for course by code");
+    mvprintw(21, 1, "(z) search for student by last name");
+    mvprintw(22, 1, "(x) search for student by phone");
+    mvprintw(23, 1, "(v) list all students courses taken");
+    mvprintw(24, 1, "(b) list student average");
+    mvprintw(25, 1, "(n) list class average");
 }
 
 void display_students_in_order(struct Node* root, int* i) { 
@@ -727,8 +729,161 @@ void list_class_average(struct Course_Grade* grades) {
     noecho();
 }
 
+void add_grade(char* grade_file) {
+    char course_name[STRING_LENGTH];
+    char student[STRING_LENGTH];
+    char grade[STRING_LENGTH];
+    char input[STRING_LENGTH];
+
+    curs_set(1);
+    echo();
+
+    mvprintw(1, 10, "enter course name: ");
+    refresh();
+    getstr(input);
+    strcpy(course_name, input);
+
+    mvprintw(2, 10, "enter student last name: ");
+    refresh();
+    getstr(input);
+    strcpy(student, input);
+
+    mvprintw(3, 10, "enter student grade: ");
+    refresh();
+    getstr(input);
+    strcpy(grade, input);
 
 
+    FILE* file=fopen(grade_file, "a");  
+    fprintf(file, "%s, %s, %s\n", course_name, student, grade);
+    fclose(file);
+    mvprintw(7, 10, "grade data saved, press any button to exit");
+    refresh();
+    getch();  
+    clear();
+    curs_set(0);
+    noecho();
+}
+
+void update_student_info(struct Node* root, char* student_file) {
+
+    char id[STRING_LENGTH];
+    char first_name[STRING_LENGTH]=" ";
+    char last_name[STRING_LENGTH]=" ";
+    char phone_number[STRING_LENGTH]=" ";
+    char email[STRING_LENGTH]=" ";
+    char input[STRING_LENGTH]=" ";
+
+    curs_set(1);
+    echo();
+
+    mvprintw(1, 10, "enter student id: ");
+    refresh();
+    getstr(input);
+    strcpy(id, input);
+
+    mvprintw(2, 10, "enter first name: ");
+    refresh();
+    getstr(input);
+    strcat(first_name, input);
+
+    mvprintw(3, 10, "enter last name: ");
+    refresh();
+    getstr(input);
+    strcat(last_name, input);
+
+    mvprintw(4, 10, "enter phone number: ");
+    refresh();
+    getstr(input);
+    strcat(phone_number, input);
+
+    mvprintw(5, 10, "enter email: ");
+    refresh();
+    getstr(input);
+    strcat(email, input);
+
+    // write here
+
+    //dfs to find and update 
+    update_tree_info(
+            root,
+            student_file,
+            id,
+            first_name,
+            last_name,
+            phone_number,
+            email);
+
+    FILE* file=fopen(student_file, "w");
+
+
+    //dfs to write everything into the file again
+    write_bst_to_file(root, student_file);
+    //
+
+    mvprintw(7, 10, "student data saved, press any button to exit");
+    refresh();
+    getch();  
+    clear();
+    curs_set(0);
+    noecho();
+
+}
+
+void update_tree_info(
+        struct Node* root,
+        char* student_file,
+        char* id,
+        char* first_name, 
+        char* last_name,
+        char* phone_number, 
+        char* email) {
+
+    if(root==NULL)
+        return;
+    if(strcmp(root->id, id)==0) {
+        strcpy(root->first_name, first_name);
+        strcpy(root->last_name, last_name);
+        strcpy(root->phone_number, phone_number);
+        strcpy(root->email, email);
+    }
+    update_tree_info(
+            root->left,
+            student_file,
+            id,
+            first_name,
+            last_name, 
+            phone_number, 
+            email); 
+    update_tree_info(
+            root->right,
+            student_file,
+            id,
+            first_name,
+            last_name, 
+            phone_number, 
+            email);
+    return;
+}
+
+void write_bst_to_file(struct Node* root, char* student_file) {
+    if(root==NULL)
+        return;
+    // write stuff here
+    
+    FILE* file=fopen(student_file, "a");  
+    fprintf(file, "%s,%s,%s,%s,%s\n", 
+            root->id,
+            root->last_name,
+            root->first_name,
+            root->phone_number,
+            root->email);
+    fclose(file);
+
+
+    write_bst_to_file(root->left, student_file);
+    write_bst_to_file(root->right, student_file);
+}
 
 
 
