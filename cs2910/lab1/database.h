@@ -83,6 +83,9 @@ void dfs_student_last_name(char* last_name, struct Node* root, int* found);
 void search_for_student_phone(struct Node* root);
 void dfs_student_phone(char* phone, struct Node* root, int* found);
 
+// grades stuff
+void list_student_courses(struct Course_Grade* grades);
+
 
 
 #endif

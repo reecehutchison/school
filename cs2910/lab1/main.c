@@ -44,7 +44,7 @@ int main() {
     // parse
     root=parse_bst(student_file, root);
     parse_stack(course_file, stack);
-
+    parse_struct(grade_file, grades);
 
     
     while(1) {
@@ -93,6 +93,8 @@ int main() {
         search_for_student_last_name(root);
     if(ch=='x')
         search_for_student_phone(root);
+    if(ch=='v')
+        list_student_courses(grades);
 
 
     }

@@ -183,6 +183,7 @@ struct Course_Grade* create_course_grade(char* course_name) {
     return new_course_grade;
 }
 
+
 void parse_struct(char* grade_file, struct Course_Grade* grades) {
     FILE* file=fopen(grade_file, "r");
     int n=0;
@@ -200,9 +201,9 @@ void parse_struct(char* grade_file, struct Course_Grade* grades) {
         int i=0;
         while((token=strtok(NULL, ","))!=NULL&&i<99) {
             strcpy(new_course_grade->students[i], token);
-            if((token=strtok(NULL, ","))!=NULL) {
+            token=strtok(NULL, ",");
+             if(token!=NULL) 
                 strcpy(new_course_grade->grades[i], token);
-            }
             ++i;
         }
         grades[n]=*new_course_grade;
@@ -210,31 +211,6 @@ void parse_struct(char* grade_file, struct Course_Grade* grades) {
         ++n;
     }
     fclose(file);
-}
-
-// this shit does not work ...
-void display_grades(struct Course_Grade* grades) {
-    for(int i=0; i<99; ++i) {
-        if(!strcmp(grades[i].course_name, ""))
-            break;
-        mvprintw(7, 40+(i*12), "%s", grades[i].course_name);
-    }
-    for(int i=0; i<99; ++i) {
-        if(!strcmp(grades[i].course_name, ""))
-            break;
-        mvprintw(8, 40+(i*12), "---------");
-    }
-    for(int i=0; i<99; ++i) {  
-        if(!strcmp(grades[i].course_name, ""))
-            break;
-        for(int j=0; j<99; ++j) {
-            if(strcmp(grades[i].grades[j], ""))
-                break;
-            mvprintw(8+j, 40+(i*12), "");
-            printw(grades[i].students[j]);
-            printw(" %s", grades[i].students[j]);
-        }
-    }
 }
 
 void display_ui() {
@@ -256,6 +232,7 @@ void display_ui() {
     mvprintw(18, 1, "(9) search for course by code");
     mvprintw(19, 1, "(z) search for student by last name");
     mvprintw(20, 1, "(x) search for student by phone");
+    mvprintw(21, 1, "(v) list all students courses taken");
 }
 
 void display_students_in_order(struct Node* root, int* i) { 
@@ -586,4 +563,56 @@ void dfs_student_phone(char* phone, struct Node* root, int* found) {
 
     return; 
 }
+
+void list_student_courses(struct Course_Grade* grades) {
+/*
+    mvprintw(20, 40, "-------%s-------", grades[40].course_name);
+    mvprintw(21, 40, "------%s-----", grades[0].students[0]);
+    mvprintw(22, 40, "------%s-----", grades[0].grades[0]); 
+*/
+
+    char input[STRING_LENGTH];
+    char str[STRING_LENGTH]=" ";
+
+    curs_set(1);
+    echo();
+
+    mvprintw(1, 10, "enter student last name: ");
+    refresh();
+    getstr(input);
+    strcat(str, input);
+
+    mvprintw(3, 10, "class, grades");
+    mvprintw(4, 10, "-------------");
+
+    int n=0; 
+
+    for(int i=0; i<80; ++i) {
+        if(strcmp(grades[i].course_name, "")==0)
+            break;
+        for(int j=0; j<80; ++j) {
+            if(strcmp(grades[i].students[j], "")==0) 
+                break;
+            if(strcmp(grades[i].students[j], str)==0)  {
+                mvprintw(5+n, 10, "%s, ", grades[i].course_name);
+                printw("%s", grades[i].grades[j]);
+                ++n;
+            }
+        }
+    }
+
+    refresh();
+    getch();  
+    clear();
+   
+}
+
+
+
+
+
+
+
+
+
 
