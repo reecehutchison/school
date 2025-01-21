@@ -91,6 +91,8 @@ int main() {
         search_course_by_code(stack);
     if(ch=='z') 
         search_for_student_last_name(root);
+    if(ch=='x')
+        search_for_student_phone(root);
 
 
     }

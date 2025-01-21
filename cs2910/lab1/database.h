@@ -80,5 +80,9 @@ void search_course_by_name(struct Monotonic_Stack* stack);
 void search_course_by_code(struct Monotonic_Stack* stack);
 void search_for_student_last_name(struct Node* root);
 void dfs_student_last_name(char* last_name, struct Node* root, int* found);
+void search_for_student_phone(struct Node* root);
+void dfs_student_phone(char* phone, struct Node* root, int* found);
+
+
 
 #endif

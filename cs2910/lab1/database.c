@@ -255,6 +255,7 @@ void display_ui() {
     mvprintw(17, 1, "(8) search for course by name");
     mvprintw(18, 1, "(9) search for course by code");
     mvprintw(19, 1, "(z) search for student by last name");
+    mvprintw(20, 1, "(x) search for student by phone");
 }
 
 void display_students_in_order(struct Node* root, int* i) { 
@@ -540,7 +541,49 @@ void dfs_student_last_name(char* last_name, struct Node* root, int* found) {
     return; 
 }
 
+void search_for_student_phone(struct Node* root) {
+    char input[STRING_LENGTH];
+    int found=0;
 
+    curs_set(1);
+    echo();
 
+    mvprintw(1, 10, "enter student phone: ");
+    refresh();
+    getstr(input);
 
+    dfs_student_phone(input, root, &found);
+
+    if(!found) 
+        mvprintw(3, 10, "student not found, press anything to exit");
+    else 
+        mvprintw(9, 10, "press anything to exit");
+
+    refresh();
+    getch();  
+    clear();
+    curs_set(0);
+    noecho();
+}
+
+void dfs_student_phone(char* phone, struct Node* root, int* found) {
+    if(root==NULL||*found) 
+        return;
+
+    char str[STRING_LENGTH]=" ";
+    strcat(str, phone);
+
+    if(strcmp(root->phone_number, str)==0) {
+        *found=1;
+        mvprintw(3, 10, "student id: %s", root->id);
+        mvprintw(4, 10, "student first name: %s", root->first_name);
+        mvprintw(5, 10, "student last name: %s", root->last_name);
+        mvprintw(6, 10, "sudent email: %s", root->email);
+        return;
+    }
+    dfs_student_phone(phone, root->left, found);
+    dfs_student_phone(phone, root->right, found);
+
+    return; 
+}
 
