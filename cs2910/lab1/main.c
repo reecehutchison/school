@@ -10,9 +10,9 @@
 //  to do -- 
 //  - LAST: the update stuff, so 6 (grades), and 7...
 //  - 15 - this one looks tough
+//  -- explore making a new parsing function for grades, for better appending!
 //
-//
-//
+
 int debug=1; 
 
 int main() {

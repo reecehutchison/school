@@ -184,6 +184,48 @@ struct Course_Grade* create_course_grade(char* course_name) {
 }
 
 
+
+void parse_struct(char* grade_file, struct Course_Grade* grades) {
+    FILE* file=fopen(grade_file, "r");
+    int num_courses=0;
+    char line[LINE_LENGTH];
+
+    while (fgets(line, sizeof(line), file)) {
+        line[strcspn(line, "\n")] = 0; 
+
+        char* course_name=strtok(line, ",");
+        char* student_name=strtok(NULL, ",");
+        char* grade=strtok(NULL, ",");
+
+        struct Course_Grade* current_course_grade=NULL;
+        for (int i=0; i<num_courses; ++i) {
+            if(strcmp(grades[i].course_name, course_name)==0) {
+                current_course_grade = &grades[i];
+                break;
+            }
+        }
+        if(!current_course_grade) { // if not found in last for loop, make new
+            current_course_grade=&grades[num_courses++];
+            strcpy(current_course_grade->course_name, course_name);
+
+            for(int i=0; i < 99; ++i) {
+                current_course_grade->students[i][0]='\0';
+                current_course_grade->grades[i][0]='\0';
+            }
+        }
+        int student_index=0; // finds next available empty strings
+        while(student_index<99&&current_course_grade->students[student_index][0]!='\0') {
+            student_index++;
+        }
+        if (student_index < 99) {
+            strcpy(current_course_grade->students[student_index], student_name);
+            strcpy(current_course_grade->grades[student_index], grade);
+        }
+    }
+    fclose(file);
+}
+
+/* old parse function
 void parse_struct(char* grade_file, struct Course_Grade* grades) {
     FILE* file=fopen(grade_file, "r");
     int n=0;
@@ -214,6 +256,7 @@ void parse_struct(char* grade_file, struct Course_Grade* grades) {
     free(new_course_grade);
     fclose(file);
 }
+*/
 
 void display_ui() {
     mvprintw(2, 3, "-- Database Program --"); 
@@ -625,7 +668,6 @@ void list_student_average(struct Course_Grade* grades) {
     getstr(input);
     strcat(str, input);
 
-
     for(int i=0; i<80; ++i) {
         if(strcmp(grades[i].course_name, "")==0)
             break;
@@ -661,7 +703,6 @@ void list_class_average(struct Course_Grade* grades) {
     mvprintw(1, 10, "enter class name: ");
     refresh();
     getstr(input);
-
 
     for(int i=0; i<80; ++i) {
         if(strcmp(grades[i].course_name, "")==0)
