@@ -236,6 +236,7 @@ void display_ui() {
     mvprintw(20, 1, "(x) search for student by phone");
     mvprintw(21, 1, "(v) list all students courses taken");
     mvprintw(22, 1, "(b) list student average");
+    mvprintw(23, 1, "(n) list class average");
 }
 
 void display_students_in_order(struct Node* root, int* i) { 
@@ -648,7 +649,42 @@ void list_student_average(struct Course_Grade* grades) {
     noecho();
 }
 
+void list_class_average(struct Course_Grade* grades) {
+    char input[STRING_LENGTH];
 
+    float sum=0; 
+    float total=0;
+
+    curs_set(1);
+    echo();
+
+    mvprintw(1, 10, "enter class name: ");
+    refresh();
+    getstr(input);
+
+
+    for(int i=0; i<80; ++i) {
+        if(strcmp(grades[i].course_name, "")==0)
+            break;
+        for(int j=0; j<80; ++j) {
+            if(strcmp(grades[i].students[j], "")==0) 
+                break;
+            if(strcmp(grades[i].course_name, input)==0)  {
+                sum+=atoi(grades[i].grades[j]);
+                ++total;
+            }
+        }
+    }
+    mvprintw(3, 10, "class average grade: %.2f", (sum/total));
+    mvprintw(7, 10, "(press any button to exit. if nan, then course not found)");
+
+    refresh();
+    getch();  
+    clear();
+ 
+    curs_set(0);
+    noecho();
+}
 
 
 

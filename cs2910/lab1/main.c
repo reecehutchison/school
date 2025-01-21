@@ -94,6 +94,8 @@ int main() {
         list_student_courses(grades);
     if(ch=='b')
         list_student_average(grades);
+    if(ch=='n')
+        list_class_average(grades);
 
 
     }
