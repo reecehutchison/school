@@ -164,6 +164,7 @@ void parse_stack(char* course_file, struct Monotonic_Stack* stack) {
     while (!feof(file)) {
         char line[LINE_LENGTH];
         while(fgets(line, sizeof(line), file)) {  
+            line[strcspn(line, "\n")] = 0; 
             struct Course* new_course=create_course("a", "a", "a");
             char* token=strtok(line, ",");
             strcpy(new_course->name, token);
@@ -281,7 +282,8 @@ void display_ui() {
     mvprintw(22, 1, "(x) search for student by phone");
     mvprintw(23, 1, "(v) list all students courses taken");
     mvprintw(24, 1, "(b) list student average");
-    mvprintw(25, 1, "(n) list class average");
+    mvprintw(25, 1, "(m) list student semester averages");
+    mvprintw(26, 1, "(n) list class average");
 }
 
 void display_students_in_order(struct Node* root, int* i) { 
@@ -884,6 +886,82 @@ void write_bst_to_file(struct Node* root, char* student_file) {
     write_bst_to_file(root->left, student_file);
     write_bst_to_file(root->right, student_file);
 }
+
+void list_student_average_semester(
+        struct Course_Grade* grades,
+        struct Monotonic_Stack* stack) {
+// ----------------------------------
+    float fall_sum=0;
+    float fall_total=0; 
+
+    float winter_sum=0; 
+    float winter_total=0; 
+
+    float spring_sum=0; 
+    float spring_total=0;
+
+    char input[STRING_LENGTH];
+    char str[STRING_LENGTH]=" ";
+
+    float sum=0; 
+    float total=0;
+
+    curs_set(1);
+    echo();
+
+    mvprintw(1, 10, "enter student last name: ");
+    refresh();
+    getstr(input);
+    strcat(str, input);
+
+    for(int i=0; i<80; ++i) {
+        if(strcmp(grades[i].course_name, "")==0)
+            break;
+        for(int j=0; j<80; ++j) {
+            if(strcmp(grades[i].students[j], "")==0) 
+                break;
+            if(strcmp(grades[i].students[j], str)==0)  {
+                for(int k=0; k<80; ++k) {
+
+                    if(stack->courses[k]==NULL)
+                        break;
+
+                    char str[STRING_LENGTH]=" ";
+                    strcat(str, grades[i].course_name);
+                    if(stack->courses[k]!=NULL&&strcmp(grades[i].course_name, stack->courses[k]->name)==0) {
+                        if(strcmp(stack->courses[k]->semester, " fall")==0) {
+                             
+                            fall_sum+=atoi(grades[i].grades[j]);
+                            ++fall_total;
+                        } 
+                        if(strcmp(stack->courses[k]->semester, " winter")==0) {
+                            winter_sum+=atoi(grades[i].grades[j]);
+                            ++winter_total;
+                        }
+                        else {     
+                            spring_sum+=atoi(grades[i].grades[j]);
+                            ++spring_total;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // print avgs here
+    mvprintw(4, 35, "fall average: %.2f", (fall_sum / fall_total));
+    mvprintw(5, 35, "winter average: %.2f", (winter_sum / winter_total));
+    mvprintw(6, 35, "spring average: %.2f", (spring_sum / spring_total));
+    mvprintw(17, 20, "(nan results mean no classes during semester were found, press anything to exit)");
+
+    refresh();
+    getch();  
+    clear();
+ 
+    curs_set(0);
+    noecho();
+}
+
 
 
 

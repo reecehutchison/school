@@ -97,6 +97,8 @@ int main() {
         add_grade(grade_file);
     if(ch=='u')
         update_student_info(root, student_file);
+    if(ch=='m')
+        list_student_average_semester(grades, stack);
 
 
     }

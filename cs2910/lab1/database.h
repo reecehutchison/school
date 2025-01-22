@@ -88,6 +88,9 @@ void dfs_student_phone(char* phone, struct Node* root, int* found);
 void list_student_courses(struct Course_Grade* grades);
 void list_student_average(struct Course_Grade* grades);
 void list_class_average(struct Course_Grade* grades);
+void list_student_average_semester(
+        struct Course_Grade* grades,
+        struct Monotonic_Stack* stack);
 
 // update student stuff
 void update_student_info(struct Node* root, char* student_file);
