@@ -227,39 +227,6 @@ void parse_struct(char* grade_file, struct Course_Grade* grades) {
     fclose(file);
 }
 
-/* old parse function
-void parse_struct(char* grade_file, struct Course_Grade* grades) {
-    FILE* file=fopen(grade_file, "r");
-    int n=0;
-    char line[LINE_LENGTH];
-    struct Course_Grade* new_course_grade=create_course_grade("a");
-    while(fgets(line, sizeof(line), file)&&n<99) {
-        line[strcspn(line, "\n")] = 0;
-        memset(new_course_grade, 0, sizeof(struct Course_Grade));
-        if(!new_course_grade) {
-            fclose(file);
-            return; 
-        }
-        char* token=strtok(line, ",");
-        if(token) {
-            strcpy(new_course_grade->course_name, token);
-        }
-        int i=0;
-        while((token=strtok(NULL, ","))!=NULL&&i<99) {
-            strcpy(new_course_grade->students[i], token);
-            token=strtok(NULL, ",");
-             if(token!=NULL) 
-                strcpy(new_course_grade->grades[i], token);
-            ++i;
-        }
-        grades[n]=*new_course_grade;
-        ++n;
-    }
-    free(new_course_grade);
-    fclose(file);
-}
-*/
-
 void display_ui() {
     mvprintw(2, 3, "-- Database Program --"); 
     mvprintw(5, 1, "Options");
@@ -323,7 +290,7 @@ void display_courses_fall(struct Monotonic_Stack* stack) {
     mvprintw(5, 40, "-----------------------------");
     int j=0; 
     for(int i=0; i<stack->size; ++i) {
-        if(strcmp(stack->courses[i]->semester, " fall\n")==0) {
+        if(strcmp(stack->courses[i]->semester, " fall")==0) {
             mvprintw(8+j, 40, "%s, %s", 
                 stack->courses[i]->name, 
                 stack->courses[i]->code);
@@ -338,7 +305,7 @@ void display_courses_winter(struct Monotonic_Stack* stack) {
     mvprintw(5, 40, "------------------------------");
     int j=0; 
     for(int i=0; i<stack->size; ++i) {
-        if(strcmp(stack->courses[i]->semester, " winter\n")==0) {
+        if(strcmp(stack->courses[i]->semester, " winter")==0) {
             mvprintw(8+j, 40, "%s, %s", 
                 stack->courses[i]->name, 
                 stack->courses[i]->code);
@@ -352,7 +319,7 @@ void display_courses_spring(struct Monotonic_Stack* stack) {
     mvprintw(5, 40, "-------------------------------");
     int j=0; 
     for(int i=0; i<stack->size; ++i) {
-        if(strcmp(stack->courses[i]->semester, " spring\n")==0) {
+        if(strcmp(stack->courses[i]->semester, " spring")==0) {
             mvprintw(8+j, 40, "%s, %s", 
                 stack->courses[i]->name, 
                 stack->courses[i]->code);
@@ -829,7 +796,6 @@ void update_student_info(struct Node* root, char* student_file) {
     clear();
     curs_set(0);
     noecho();
-
 }
 
 void update_tree_info(
@@ -961,8 +927,3 @@ void list_student_average_semester(
     curs_set(0);
     noecho();
 }
-
-
-
-
-

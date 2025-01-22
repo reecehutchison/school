@@ -5,12 +5,6 @@
 
 #define STUDENT_FILE "student.data"
 
-//
-//
-//  to do -- 
-//  - 15 -- the print average for specific sem one...
-//
-
 int debug=1; 
 
 int main() {
@@ -40,7 +34,7 @@ int main() {
     parse_stack(course_file, stack);
     parse_struct(grade_file, grades);
 
-
+    // ui
     while(1) {
 
     display_ui();
@@ -78,7 +72,6 @@ int main() {
         add_student(student_file);
     if(ch=='c')
         add_course(course_file);
-    // 7 goes here
     if(ch=='8')
         search_course_by_name(stack);
     if(ch=='9')
@@ -99,8 +92,6 @@ int main() {
         update_student_info(root, student_file);
     if(ch=='m')
         list_student_average_semester(grades, stack);
-
-
     }
 
     endwin();
