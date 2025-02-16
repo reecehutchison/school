@@ -67,6 +67,15 @@ void SortingAlgorithms::insertionSort(std::vector<int>& vec) {
     }
 }
 
+// sortingalgorithms.cpp
+// reece hutchison
+// sunday feb 16
+// sorts given vector by recursive merge sort
+// input: a vector V[0...n-1] of orderable elements
+// output: a vector V[0...n-1] sorted in nondecreasing order
+// time complexity: O(nlogn)
+// space complexity: O(n)
+// stability: merge sort is stable
 void SortingAlgorithms::mergeSort(std::vector<int>& vec) {
     int n=vec.size();
     if(n>1) {
@@ -84,6 +93,13 @@ void SortingAlgorithms::mergeSort(std::vector<int>& vec) {
     }
 }
 
+// sortingalgorithms.cpp
+// reece hutchison
+// sunday feb 16
+// merges two sored arrays into one sorted array
+// input: vectors left[0...n/2-1] and right[0...n-n/2-1] both sorted
+// output: a vector V[0...n-1] of elements left and right
+// note: used in merge sort!
 void SortingAlgorithms::merge(std::vector<int>& vec, std::vector<int>& left, std::vector<int>& right) {
     int n=vec.size(); 
     int i=0; 
