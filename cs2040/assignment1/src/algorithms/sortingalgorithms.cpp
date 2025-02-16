@@ -7,7 +7,7 @@
 // input: a vector V[0...n-1] of orderable elements
 // output: a vector V[0...n-1] sorted in nondecreasing order
 // time complexity: O(n^2)
-// space complexity: constant
+// space complexity: O(1)
 // stability: bubble sort is stable
 void SortingAlgorithms::bubbleSort(std::vector<int>& vec) {
     int n=vec.size(); 
@@ -21,6 +21,7 @@ void SortingAlgorithms::bubbleSort(std::vector<int>& vec) {
         }
     }
 }
+
 // sortingalgorithms.cpp
 // reece hutchision
 // sunday feb 16
@@ -28,7 +29,7 @@ void SortingAlgorithms::bubbleSort(std::vector<int>& vec) {
 // input: a vector V[0...n-1] of orderable eleemnts
 // output: a vector V[0...n-1] sorted in nondecreasing order
 // time complexity: O(n^2)
-// space complexity: constant
+// space complexity: O(1)
 // stability: selection sort is not stable
 void SortingAlgorithms::selectionSort(std::vector<int>& vec) {
     int n=vec.size();
@@ -43,3 +44,28 @@ void SortingAlgorithms::selectionSort(std::vector<int>& vec) {
         vec[min]=tmp;
     }
 }
+
+// sortingalgorithms.cpp
+// reece hutchison
+// sunday feb 16
+// sorts given vector by insertion sort
+// input: a vector V[0...n-1] of n orderable elements
+// output: a vector V[0...n-1] sorted in nondecreasing order
+// time complexity: O(n^2)
+// space complexity: O(1)
+// staboloty: insertion sort is stable
+void SortingAlgorithms::insertionSort(std::vector<int>& vec) {
+    int n=vec.size();
+    for(int i=1; i<n; ++i) {
+        int v=vec[i];
+        int j=i-1;
+        while(j>=0 && vec[j]>v) {
+            vec[j+1]=vec[j];
+            j=j-1;
+        }
+        vec[j+1]=v;
+    }
+}
+
+
+
