@@ -29,7 +29,7 @@ int main() {
         std::cout << e << " ";
     std::cout << "\n";
     
-    sorter.insertionSort(vec);
+    sorter.mergeSort(vec);
 
     for(auto e : vec)
         std::cout << e << " ";

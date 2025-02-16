@@ -21,7 +21,7 @@ public:
 
     // merge sort
     void mergeSort(std::vector<int>& vec);
-    void merge(std::vector<int>& vec, int left, int mid, int right);
+    void merge(std::vector<int>& vec, std::vector<int>& left, std::vector<int>& right);
 
     // quick sort
     void quickSort(std::vector<int>& vec, int low, int high);

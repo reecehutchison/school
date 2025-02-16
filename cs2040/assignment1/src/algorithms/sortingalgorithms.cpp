@@ -67,5 +67,38 @@ void SortingAlgorithms::insertionSort(std::vector<int>& vec) {
     }
 }
 
+void SortingAlgorithms::mergeSort(std::vector<int>& vec) {
+    int n=vec.size();
+    if(n>1) {
+        std::vector<int> left;
+        std::vector<int> right;
+        for(int i=0; i<n; ++i) {
+            if(i<(n/2))
+                left.push_back(vec[i]);
+            else 
+                right.push_back(vec[i]);
+        }
+        mergeSort(left); 
+        mergeSort(right);
+        merge(vec, left, right);
+    }
+}
 
+void SortingAlgorithms::merge(std::vector<int>& vec, std::vector<int>& left, std::vector<int>& right) {
+    int n=vec.size(); 
+    int i=0; 
+    int j=0;
+    int k=0;
+    while(i<(n/2) && j<(n-n/2)) {
+        if(left[i]<=right[j]) 
+            vec[k++]=left[i++];
+        else 
+            vec[k++]=right[j++]; 
+    }
+    while(i<(n/2)) 
+        vec[k++]=left[i++];
+    
+    while(j<(n-n/2)) 
+        vec[k++]=right[j++]; 
+}
 
