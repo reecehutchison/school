@@ -3,6 +3,9 @@
 
 #include <chrono>
 
+// this header file includes the stop watch function to time the runtimes of 
+// the sorting algorithms
+
 class Stopwatch {
 private:
     std::chrono::time_point<std::chrono::high_resolution_clock> startTime;

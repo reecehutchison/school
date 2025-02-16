@@ -1,7 +1,11 @@
 #include "prgdisplay.h"
 
-
-// starts ncurses with desired setup to display resulting data
+// prgdisplay.cpp
+// reece hutchsion
+// sunday feb 16
+// starts ncurses window with desired behaviour
+// input: nothing
+// output: nothing
 void PrgDisplay::initializeNcurses() {
     initscr();
     cbreak();
@@ -10,7 +14,12 @@ void PrgDisplay::initializeNcurses() {
     curs_set(0);
 }
 
+// progdisplay.cpp
+// reece hutchison
+// sunday feb 16
 // destorys the ncurses window and returns to normal terminal behaviour
+// input: nothing
+// output: nothing
 void PrgDisplay::cleanupNcurses() {
     endwin();
 }

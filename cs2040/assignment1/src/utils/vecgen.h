@@ -4,6 +4,9 @@
 #include <vector>
 #include <random>
 
+
+// this header file includes the test array creation function for the tests
+
 class VecGen {
 public:
     

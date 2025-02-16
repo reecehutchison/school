@@ -1,10 +1,10 @@
+#ifndef PRGDISPLAY_H
+#define PRGDISPLAY_H
+
 // this header file includes all of the functions that will 
 // display the data results using the ncurses library to 
 // help simplify the task. 
 
-
-#ifndef PRGDISPLAY_H
-#define PRGDISPLAY_H
 
 #include <ncurses.h>
 
