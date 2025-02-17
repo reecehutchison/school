@@ -1,7 +1,6 @@
 PROG = SortingExec
 
-OBJS = src/display/prgdisplay.cpp src/utils/stopwatch.cpp \
-	   src/utils/vecgen.cpp src/algorithms/sortingalgorithms.cpp
+OBJS = src/utils/stopwatch.cpp src/utils/vecgen.cpp src/algorithms/sortingalgorithms.cpp
 
 all:
 	g++ src/main.cpp $(OBJS) -o $(PROG) -std=c++17 -lncurses 

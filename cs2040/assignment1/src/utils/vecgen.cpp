@@ -11,7 +11,7 @@ std::vector<int> VecGen::generateRandomVector(int size) {
 
     std::random_device rd; // note, this part sets up a random device
     std::mt19937 gen(rd()); // that will get random numbers from 1 to n
-    int n=10;
+    int n=1000000;
     std::uniform_int_distribution<int> dist(1, n);
 
     for(int i=0; i<size; ++i) {
@@ -25,31 +25,21 @@ std::vector<int> VecGen::generateRandomVector(int size) {
 // vecgen.cpp
 // reece hutchison
 // sunday feb 16 
-// returns vector in sorted order of wanted size
+// sorts the random vector so its in sorted order
 // input: size you want the vector to be
 // output: a vector of the size you wanted in sorted order
-std::vector<int> VecGen::generateSortedVector(int size) {
-    std::vector<int> vec;
-
-    for(int i=1; i<size+1; ++i) {
-        vec.push_back(i);
-    }
-
+std::vector<int> VecGen::generateSortedVector(std::vector<int> vec) {
+    sort(vec.begin(), vec.end());
     return vec;
 }
 
 // vecgen.cpp
 // reece hutchison
 // sunday feb 16
-// returns an array in reverse sorted order...
+// returns an array in reverse sorted order
 // input: the size you want the vector to be
 // output: the vector in reverse order of the desired size
-std::vector<int> VecGen::generateReverseVector(int size) {
-    std::vector<int> vec;
-
-    for(int i=size; i>0; --i) {
-        vec.push_back(i);
-    }
-
+std::vector<int> VecGen::generateReverseVector(std::vector<int> vec) {
+    sort(vec.rbegin(), vec.rend());
     return vec;
 }
