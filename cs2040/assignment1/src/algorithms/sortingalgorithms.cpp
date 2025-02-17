@@ -11,6 +11,7 @@
 // stability: bubble sort is stable
 void SortingAlgorithms::bubbleSort(std::vector<int>& vec) {
     int n=vec.size(); 
+
     for(int i=0; i<n-1; ++i) {
         for(int j=0; j<n-1-i; ++j) {
             if(vec[j+1]<vec[j]) { // basic opperation in this function is 
@@ -33,6 +34,7 @@ void SortingAlgorithms::bubbleSort(std::vector<int>& vec) {
 // stability: selection sort is not stable
 void SortingAlgorithms::selectionSort(std::vector<int>& vec) {
     int n=vec.size();
+
     for(int i=0; i<n-1; ++i) {
         int min=i;
         for(int j=i+1; j<n; ++j) {
@@ -56,6 +58,7 @@ void SortingAlgorithms::selectionSort(std::vector<int>& vec) {
 // staboloty: insertion sort is stable
 void SortingAlgorithms::insertionSort(std::vector<int>& vec) {
     int n=vec.size();
+
     for(int i=1; i<n; ++i) {
         int v=vec[i];
         int j=i-1;
@@ -118,3 +121,50 @@ void SortingAlgorithms::merge(std::vector<int>& vec, std::vector<int>& left, std
         vec[k++]=right[j++]; 
 }
 
+// sortingalgorithms.cpp
+// reece hutchison
+// sunday feb 16
+// sorts a subvector by quicksort
+// input: a subvector V[0...n-1] defined by left and right indecies
+// output: a subvector V[l...r] sorted in nondecreasing order
+// time complexty: O(nlogn)
+// space complexity: O(logn) --> requres space on call stack
+// stability: quick sort is not stable
+void SortingAlgorithms::quickSort(std::vector<int>& vec, int left, int right) {
+    if(left<right) {
+        int s=partition(vec, left, right);
+        quickSort(vec, left, s-1);
+        quickSort(vec, s+1, right);
+    }
+}
+
+// sortingalgorithms.cpp
+// reece hutchison
+// sunday feb 16
+// partitions a subarray by hoare's algorithm, using first element as pivot
+// input: subvector of vector V[0...n-1], defined by left and right
+// output: partition of V[l...r] with split position returned by function
+// note: used in quicksort!
+int SortingAlgorithms::partition(std::vector<int>& vec, int left, int right) {
+    int p=vec[left];  
+    int i=left+1;   
+    int j=right;      
+
+    while(1) {
+        while(i<=right && vec[i]<=p) 
+            i++;
+        while(vec[j]>p) 
+            j--;
+        if (i>=j) break; // breaking out early prevents undoing last swap
+
+        int tmp=vec[i];  // swap vec[i] and vec[j]
+        vec[i]=vec[j];   
+        vec[j]=tmp;
+    }
+
+    int tmp=vec[left]; // swap vec[left] and vec[j]
+    vec[left]=vec[j];
+    vec[j]=tmp;
+
+    return j;
+}

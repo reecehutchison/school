@@ -24,8 +24,8 @@ public:
     void merge(std::vector<int>& vec, std::vector<int>& left, std::vector<int>& right);
 
     // quick sort
-    void quickSort(std::vector<int>& vec, int low, int high);
-    int partition(std::vector<int>& vec, int low, int high);
+    void quickSort(std::vector<int>& vec, int left, int right);
+    int partition(std::vector<int>& vec, int left, int right);
 };
 
 #endif 
