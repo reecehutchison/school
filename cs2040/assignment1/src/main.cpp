@@ -331,9 +331,9 @@ int main() {
             std::cout << " | ";
     }
     std::cout << "\n";
-
+ 
     // ------------------------------------------------------
-    // 2. insertion sort
+    // 3. insertion sort
     std::vector<std::vector<int>> isRandomListSmall=randomListSmall;
     std::vector<std::vector<int>> isSortedListSmall=sortedListSmall;
     std::vector<std::vector<int>> isReverseListSmall=reverseListSmall;
@@ -465,7 +465,7 @@ int main() {
 
 
     // ------------------------------------------------------
-    // 4. insertion sort
+    // 4. selection sort
     std::vector<std::vector<int>> ssRandomListSmall=randomListSmall;
     std::vector<std::vector<int>> ssSortedListSmall=sortedListSmall;
     std::vector<std::vector<int>> ssReverseListSmall=reverseListSmall;
