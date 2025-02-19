@@ -4,6 +4,7 @@
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include <string>
 
 // main.cpp
 // reece hutchison
@@ -65,6 +66,33 @@ int main() {
     for(int i=0; i<10; ++i) 
         reverseListLarge.push_back(gen.generateReverseVector(randomListLarge[i]));
 
+    double minRandomSmall=99999999999;
+    std::string strRandomSmall="";
+
+    double minSortedSmall=99999999999;
+    std::string strSortedSmall="";
+
+    double minReverseSmall=99999999999;
+    std::string strReverseSmall="";
+
+    double minRandomMed=99999999999;
+    std::string strRandomMed="";
+
+    double minSortedMed=99999999999;
+    std::string strSortedMed="";
+    
+    double minReverseMed=99999999999;
+    std::string strReverseMed="";
+
+    double minRandomLarge=99999999999;
+    std::string strRandomLarge="";
+    
+    double minSortedLarge=99999999999;
+    std::string strSortedLarge="";
+
+    double minReverseLarge=99999999999; 
+    std::string strReverseLarge="";
+
     // ------------------------------------------------------
     // 1. quick sort
     std::vector<std::vector<int>> qsRandomListSmall=randomListSmall;
@@ -89,6 +117,10 @@ int main() {
         timer.start(); 
         sorter.quickSort(qsRandomListSmall[i], 0, qsRandomListSmall.size()-1);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomSmall) {
+            minRandomSmall=timer.getElapsedMilliseconds();
+            strRandomSmall="Quick Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -101,6 +133,10 @@ int main() {
         timer.start(); 
         sorter.quickSort(qsSortedListSmall[i], 0, qsSortedListSmall.size()-1);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedSmall) {
+            minSortedSmall=timer.getElapsedMilliseconds();
+            strSortedSmall="Quick Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -113,6 +149,10 @@ int main() {
         timer.start(); 
         sorter.quickSort(qsReverseListSmall[i], 0, qsReverseListSmall.size()-1);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseSmall) {
+            minReverseSmall=timer.getElapsedMilliseconds();
+            strReverseSmall="Quick Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -128,6 +168,10 @@ int main() {
         timer.start(); 
         sorter.quickSort(qsRandomListMed[i], 0, qsRandomListMed.size()-1);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomMed)  {
+            minRandomMed=timer.getElapsedMilliseconds();
+            strRandomMed="Quick Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -140,6 +184,10 @@ int main() {
         timer.start(); 
         sorter.quickSort(qsSortedListMed[i], 0, qsSortedListMed.size()-1);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedMed) {
+            minSortedMed=timer.getElapsedMilliseconds();
+            strSortedMed="Quick Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -152,6 +200,10 @@ int main() {
         timer.start(); 
         sorter.quickSort(qsReverseListMed[i], 0, qsReverseListMed.size()-1);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseMed) {
+            minReverseMed=timer.getElapsedMilliseconds();
+            strReverseMed="Quick Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -167,6 +219,10 @@ int main() {
         timer.start(); 
         sorter.quickSort(qsRandomListLarge[i], 0, qsRandomListLarge.size()-1);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomLarge) {
+            minRandomLarge=timer.getElapsedMilliseconds();  
+            strRandomLarge="Quick Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -179,6 +235,10 @@ int main() {
         timer.start(); 
         sorter.quickSort(qsSortedListLarge[i], 0, qsSortedListLarge.size()-1);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedLarge) {
+            minSortedLarge=timer.getElapsedMilliseconds();
+            strSortedLarge="Quick Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -191,6 +251,10 @@ int main() {
         timer.start(); 
         sorter.quickSort(qsReverseListLarge[i], 0, qsReverseListLarge.size()-1);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseLarge) {
+            minReverseLarge=timer.getElapsedMilliseconds(); 
+            strReverseLarge="Quick Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -224,6 +288,10 @@ int main() {
         timer.start(); 
         sorter.mergeSort(msRandomListSmall[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomSmall) {
+            minRandomSmall=timer.getElapsedMilliseconds();
+            strRandomSmall="Merge Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -236,6 +304,10 @@ int main() {
         timer.start(); 
         sorter.mergeSort(msSortedListSmall[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedSmall) {
+            minSortedSmall=timer.getElapsedMilliseconds(); 
+            strSortedSmall="Merge Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -248,6 +320,10 @@ int main() {
         timer.start(); 
         sorter.mergeSort(msReverseListSmall[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseSmall) {
+            minReverseSmall=timer.getElapsedMilliseconds();
+            strReverseSmall="Merge Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -262,6 +338,10 @@ int main() {
         timer.start(); 
         sorter.mergeSort(msRandomListMed[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomMed) {
+            minRandomMed=timer.getElapsedMilliseconds(); 
+            strRandomMed="Merge Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -274,6 +354,10 @@ int main() {
         timer.start(); 
         sorter.mergeSort(msSortedListMed[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedMed) {
+            minSortedMed=timer.getElapsedMilliseconds();
+            strSortedMed="Merge Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -286,6 +370,10 @@ int main() {
         timer.start(); 
         sorter.mergeSort(msReverseListMed[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseMed) {
+            minReverseMed=timer.getElapsedMilliseconds();
+            strReverseMed="Merge Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -301,6 +389,10 @@ int main() {
         timer.start(); 
         sorter.mergeSort(msRandomListLarge[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomLarge) {
+            minRandomLarge=timer.getElapsedMilliseconds();
+            strRandomLarge="Merge Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -313,6 +405,10 @@ int main() {
         timer.start(); 
         sorter.mergeSort(msSortedListLarge[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedLarge) {
+            minSortedLarge=timer.getElapsedMilliseconds();
+            strSortedLarge="Merge Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -325,6 +421,10 @@ int main() {
         timer.start(); 
         sorter.mergeSort(msReverseListLarge[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseLarge) {
+            minReverseLarge=timer.getElapsedMilliseconds();
+            strReverseLarge="Merge Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -355,6 +455,10 @@ int main() {
         timer.start(); 
         sorter.insertionSort(isRandomListSmall[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomSmall) {
+            minRandomSmall=timer.getElapsedMilliseconds();
+            strRandomSmall="Insertion Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -367,6 +471,10 @@ int main() {
         timer.start(); 
         sorter.insertionSort(isSortedListSmall[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedSmall) {
+            minSortedSmall=timer.getElapsedMilliseconds();
+            strSortedSmall="Insertion Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -379,6 +487,10 @@ int main() {
         timer.start(); 
         sorter.insertionSort(isReverseListSmall[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseSmall) {
+            minReverseSmall=timer.getElapsedMilliseconds();
+            strReverseSmall="Insertion Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -392,7 +504,11 @@ int main() {
     for(int i=0; i<10; ++i) {
         timer.start(); 
         sorter.insertionSort(isRandomListMed[i]);
-        timer.stop();
+        timer.stop();  
+        if(timer.getElapsedMilliseconds()<minRandomMed) {
+            minRandomMed=timer.getElapsedMilliseconds();
+            strRandomMed="Insertion Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -405,6 +521,10 @@ int main() {
         timer.start(); 
         sorter.insertionSort(isSortedListMed[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedMed) {
+            minSortedMed=timer.getElapsedMilliseconds();
+            strSortedMed="Insertion Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -417,6 +537,10 @@ int main() {
         timer.start(); 
         sorter.insertionSort(isReverseListMed[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseMed) {
+            minReverseMed=timer.getElapsedMilliseconds();
+            strReverseMed="Insertion Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -432,6 +556,10 @@ int main() {
         timer.start(); 
         sorter.insertionSort(isRandomListLarge[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomLarge) {
+            minRandomLarge=timer.getElapsedMilliseconds();
+            strRandomLarge="Insertion Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -444,6 +572,10 @@ int main() {
         timer.start(); 
         sorter.insertionSort(isSortedListLarge[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedLarge) {
+            minSortedLarge=timer.getElapsedMilliseconds();
+            strSortedLarge="Insertion Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -456,6 +588,10 @@ int main() {
         timer.start(); 
         sorter.insertionSort(isReverseListLarge[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseLarge) {
+            minReverseLarge=timer.getElapsedMilliseconds();
+            strReverseLarge="Insertion Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -487,6 +623,10 @@ int main() {
         timer.start(); 
         sorter.selectionSort(ssRandomListSmall[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomSmall) {
+            minRandomSmall=timer.getElapsedMilliseconds();
+            strRandomSmall="Selection Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -499,6 +639,10 @@ int main() {
         timer.start(); 
         sorter.selectionSort(ssSortedListSmall[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedSmall) {
+            minSortedSmall=timer.getElapsedMilliseconds();
+            strSortedSmall="Selection Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -511,6 +655,10 @@ int main() {
         timer.start(); 
         sorter.selectionSort(ssReverseListSmall[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseSmall) {
+            minReverseSmall=timer.getElapsedMilliseconds();
+            strReverseSmall="Selection Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -525,6 +673,10 @@ int main() {
         timer.start(); 
         sorter.selectionSort(ssRandomListMed[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomMed) {
+            minRandomMed=timer.getElapsedMilliseconds();
+            strRandomMed="Selection Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -537,6 +689,10 @@ int main() {
         timer.start(); 
         sorter.selectionSort(ssSortedListMed[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedMed) {
+            minSortedMed=timer.getElapsedMilliseconds();
+            strSortedMed="Selection Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -549,6 +705,10 @@ int main() {
         timer.start(); 
         sorter.selectionSort(ssReverseListMed[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseMed) {
+            minReverseMed=timer.getElapsedMilliseconds();
+            strReverseMed="Selection Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -564,6 +724,10 @@ int main() {
         timer.start(); 
         sorter.selectionSort(ssRandomListLarge[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomLarge) {
+            minRandomLarge=timer.getElapsedMilliseconds();
+            strRandomLarge="Selection Sort";
+        } 
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -576,6 +740,10 @@ int main() {
         timer.start(); 
         sorter.selectionSort(ssSortedListLarge[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedLarge) {
+            minSortedLarge=timer.getElapsedMilliseconds();
+            strSortedLarge="Selection Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -588,6 +756,10 @@ int main() {
         timer.start(); 
         sorter.selectionSort(ssReverseListLarge[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseLarge) {
+            minReverseLarge=timer.getElapsedMilliseconds();
+            strReverseLarge="Selection Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -619,6 +791,10 @@ int main() {
         timer.start(); 
         sorter.bubbleSort(bsRandomListSmall[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomSmall) {
+            minRandomSmall=timer.getElapsedMilliseconds();
+            strRandomSmall="Bubble Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -631,6 +807,10 @@ int main() {
         timer.start(); 
         sorter.bubbleSort(bsSortedListSmall[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedSmall) {
+            minSortedSmall=timer.getElapsedMilliseconds();
+            strSortedSmall="Bubble Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -643,6 +823,10 @@ int main() {
         timer.start(); 
         sorter.bubbleSort(bsReverseListSmall[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseSmall) {
+            minReverseSmall=timer.getElapsedMilliseconds();
+            strReverseSmall="Bubble Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -657,6 +841,10 @@ int main() {
         timer.start(); 
         sorter.bubbleSort(bsRandomListMed[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomMed) {
+            minRandomMed=timer.getElapsedMilliseconds();
+            strRandomMed="Bubble Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -669,6 +857,10 @@ int main() {
         timer.start(); 
         sorter.bubbleSort(bsSortedListMed[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedMed) {
+            minSortedMed=timer.getElapsedMilliseconds(); 
+            strSortedMed="Bubble Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -681,6 +873,10 @@ int main() {
         timer.start(); 
         sorter.bubbleSort(bsReverseListMed[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseMed) {
+            minReverseMed=timer.getElapsedMilliseconds();
+            strReverseMed="Bubble Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -696,6 +892,10 @@ int main() {
         timer.start(); 
         sorter.bubbleSort(bsRandomListLarge[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minRandomLarge) {
+            minRandomLarge=timer.getElapsedMilliseconds();
+            strRandomLarge="Bubble Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -708,6 +908,10 @@ int main() {
         timer.start(); 
         sorter.bubbleSort(bsSortedListLarge[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minSortedLarge) {
+            minSortedLarge=timer.getElapsedMilliseconds();
+            strSortedLarge="Bubble Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
@@ -720,14 +924,35 @@ int main() {
         timer.start(); 
         sorter.bubbleSort(bsReverseListLarge[i]);
         timer.stop();
+        if(timer.getElapsedMilliseconds()<minReverseLarge) {
+            minReverseLarge=timer.getElapsedMilliseconds();
+            strReverseLarge="Bubble Sort";
+        }
         std::cout << std::fixed << std::setprecision(6) << timer.getElapsedMilliseconds();
         if(i!=9)
             std::cout << " | ";
     }
     std::cout << "\n";
 
+    // ------------------------------------- 
+    // stats
+    
+    std::cout << "----------------------------------------------------\n";
+    std::cout << "Best times and the algorithms:\n";
+    std::cout << "note: sizes are smaller due to taking to long on my computer\n\n";
+
+    std::cout << "Random, n=1,000: " << strRandomSmall << minRandomSmall << "\n";
+    std::cout << "Sorted, n=1,000: " << strSortedSmall << minSortedSmall << "\n";
+    std::cout << "Reverse, n=1,000: " << strReverseSmall << minReverseSmall << "\n";
 
 
+    std::cout << "Random, n=10,000: " << strRandomMed << minRandomMed << "\n";
+    std::cout << "Sorted, n=10,000: " << strSortedMed << minSortedMed << "\n";
+    std::cout << "Reverse, n=10,000: " << strReverseMed << minReverseMed << "\n";
+
+    std::cout << "Random, n=100,000: " << strRandomLarge << minRandomLarge << "\n";
+    std::cout << "Sorted, n=100,000: " << strSortedLarge << minSortedLarge << "\n";
+    std::cout << "Reverse, n=100,000: " << strReverseLarge << minReverseLarge << "\n";
 
     std::cout << "\n\n\n";
     return 0;
