@@ -23,7 +23,7 @@ int main() {
 
     // lists of initial small vectors
     std::vector<std::vector<int>> randomListSmall; 
-    int n1=100000; // size of vectors
+    int n1=1000; // size of vectors
     for(int i=0; i<10; ++i) 
         randomListSmall.push_back(gen.generateRandomVector(n1));
 
@@ -38,7 +38,7 @@ int main() {
 
     // lists of initial medium vectors
     std::vector<std::vector<int>> randomListMed; 
-    int n2=1000000; // size of vectors
+    int n2=10000; // size of vectors
     for(int i=0; i<10; ++i) 
         randomListMed.push_back(gen.generateRandomVector(n2));
 
@@ -53,7 +53,7 @@ int main() {
 
     // lists of initial large vectors
     std::vector<std::vector<int>> randomListLarge; 
-    int n3=10000000; // size of vectors
+    int n3=100000; // size of vectors
     for(int i=0; i<10; ++i) 
         randomListLarge.push_back(gen.generateRandomVector(n3));
 
@@ -64,7 +64,6 @@ int main() {
     std::vector<std::vector<int>> reverseListLarge; 
     for(int i=0; i<10; ++i) 
         reverseListLarge.push_back(gen.generateReverseVector(randomListLarge[i]));
-
 
     // ------------------------------------------------------
     // 1. quick sort
@@ -83,7 +82,7 @@ int main() {
     std::cout << "\n\n";
     std::cout << "----------------------------------------------------\n";
     std::cout << "Quick Sort Runtime in Miliseconds\n";
-    std::cout << "n = 100,000\n";
+    std::cout << "n = 1000\n";
     // random list small
     std:: cout << "Random Arrays:  "; 
     for(int i=0; i<10; ++i) {
@@ -121,7 +120,7 @@ int main() {
     std::cout << "\n";
 
 
-    std::cout << "n = 1,000,000\n";
+    std::cout << "n = 10,000\n";
 
     // random list medium
     std:: cout << "Random Arrays:  "; 
@@ -160,7 +159,7 @@ int main() {
     std::cout << "\n";
 
 
-    std::cout << "n = 10,000,000\n";
+    std::cout << "n = 100,000\n";
 
     // random list large
     std:: cout << "Random Arrays:  "; 
@@ -218,7 +217,7 @@ int main() {
     std::cout << "\n";
     std::cout << "----------------------------------------------------\n";
     std::cout << "Merge Sort Runtime in Miliseconds\n";
-    std::cout << "n = 100,000\n";
+    std::cout << "n = 1,000\n";
     // random list small
     std:: cout << "Random Arrays:  "; 
     for(int i=0; i<10; ++i) {
@@ -255,7 +254,7 @@ int main() {
     }
     std::cout << "\n";
 
-    std::cout << "n = 1,000,000\n";
+    std::cout << "n = 10,000\n";
 
     // random list medium
     std:: cout << "Random Arrays:  "; 
@@ -294,7 +293,7 @@ int main() {
     std::cout << "\n";
 
 
-    std::cout << "n = 10,000,000\n";
+    std::cout << "n = 100,000\n";
 
     // random list large
     std:: cout << "Random Arrays:  "; 
@@ -331,7 +330,7 @@ int main() {
             std::cout << " | ";
     }
     std::cout << "\n";
- 
+
     // ------------------------------------------------------
     // 3. insertion sort
     std::vector<std::vector<int>> isRandomListSmall=randomListSmall;
@@ -349,7 +348,7 @@ int main() {
     std::cout << "\n";
     std::cout << "----------------------------------------------------\n";
     std::cout << "Insertion Sort Runtime in Miliseconds\n";
-    std::cout << "n = 100,000\n";
+    std::cout << "n = 1,000\n";
     // random list small
     std:: cout << "Random Arrays:  "; 
     for(int i=0; i<10; ++i) {
@@ -386,7 +385,7 @@ int main() {
     }
     std::cout << "\n";
 
-    std::cout << "n = 1,000,000\n";
+    std::cout << "n = 10,000\n";
 
     // random list medium
     std:: cout << "Random Arrays:  "; 
@@ -425,7 +424,7 @@ int main() {
     std::cout << "\n";
 
 
-    std::cout << "n = 10,000,000\n";
+    std::cout << "n = 100,000\n";
 
     // random list large
     std:: cout << "Random Arrays:  "; 
@@ -481,7 +480,7 @@ int main() {
     std::cout << "\n";
     std::cout << "----------------------------------------------------\n";
     std::cout << "Selection Sort Runtime in Miliseconds\n";
-    std::cout << "n = 100,000\n";
+    std::cout << "n = 1,000\n";
     // random list small
     std:: cout << "Random Arrays:  "; 
     for(int i=0; i<10; ++i) {
@@ -518,7 +517,7 @@ int main() {
     }
     std::cout << "\n";
 
-    std::cout << "n = 1,000,000\n";
+    std::cout << "n = 10,000\n";
 
     // random list medium
     std:: cout << "Random Arrays:  "; 
@@ -557,7 +556,7 @@ int main() {
     std::cout << "\n";
 
 
-    std::cout << "n = 10,000,000\n";
+    std::cout << "n = 100,000\n";
 
     // random list large
     std:: cout << "Random Arrays:  "; 
@@ -613,7 +612,7 @@ int main() {
     std::cout << "\n";
     std::cout << "----------------------------------------------------\n";
     std::cout << "Bubble Sort Runtime in Miliseconds\n";
-    std::cout << "n = 100,000\n";
+    std::cout << "n = 1,000\n";
     // random list small
     std:: cout << "Random Arrays:  "; 
     for(int i=0; i<10; ++i) {
@@ -650,7 +649,7 @@ int main() {
     }
     std::cout << "\n";
 
-    std::cout << "n = 1,000,000\n";
+    std::cout << "n = 10,000\n";
 
     // random list medium
     std:: cout << "Random Arrays:  "; 
@@ -689,7 +688,7 @@ int main() {
     std::cout << "\n";
 
 
-    std::cout << "n = 10,000,000\n";
+    std::cout << "n = 100,000\n";
 
     // random list large
     std:: cout << "Random Arrays:  "; 
