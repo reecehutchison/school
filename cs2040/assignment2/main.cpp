@@ -14,7 +14,7 @@ int DEBUG=0; // set to 1 for debugging on, 0 for off
 
 
 /* 
-Module name: TreeNode
+Module name: main
 Author: Reece Hutchison
 Date: Thu Mar 20, 2025
 Description: The entry point for my Morse code program. It will 
@@ -81,7 +81,7 @@ int main() {
 }
 
 /* 
-Module name: TreeNode
+Module name: main
 Author: Reece Hutchison
 Date: Thu Mar 20, 2025
 Description: Using fstream, the function will parse the file that
@@ -109,7 +109,7 @@ void parse(TreeNode* root, string textfile) {
      infile.close();
 }
 /* 
-Module name: TreeNode
+Module name: main
 Author: Reece Hutchison
 Date: Thu Mar 20, 2025
 Description: Takes the line gotten from the user entering the message, 
