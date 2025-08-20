@@ -6,36 +6,44 @@ const int infinity=99999;
 
 // sparse graph 
 std::vector<std::vector<int>> test1 = {
-    {infinity, 1, infinity, 3, infinity},  
-    {infinity, infinity, 5, infinity, infinity}, 
+    {infinity, 1, infinity, infinity, infinity},  
+    {infinity, infinity, 5, 3, infinity}, 
     {infinity, infinity, infinity, infinity, 1},  
     {infinity, infinity, 2, infinity, infinity},  
-    {infinity, infinity, infinity, infinity, 6} 
+    {infinity, 9, infinity, infinity, infinity} 
 };
 
-// not sparse or dense, in between graph
+// not sparse or dense, in between graph (make still)
 std::vector<std::vector<int>> test2 = {
-    {infinity, 1, infinity, 3, infinity},  
-    {infinity, infinity, 5, infinity, 8}, 
-    {infinity, infinity, infinity, infinity, 7},  
-    {4, infinity, 2, infinity, 9},  
-    {infinity, 6, infinity, infinity, 10} 
+    {infinity, infinity, infinity, infinity, infinity},  
+    {infinity, infinity, infinity, infinity, infinity}, 
+    {infinity, infinity, infinity, infinity, infinity},  
+    {infinity, infinity, infinity, infinity, infinity},  
+    {infinity, infinity, infinity, infinity, infinity} 
 };
 
-// dense graph
+// dense graph (make still)
 std::vector<std::vector<int>> test3 = {
-    {infinity, 1, 5, 3, infinity},  
-    {4, 7, 5, infinity, 8}, 
-    {6, 2, 9, 3, 7},  
-    {4, 8, 2, infinity, 9},  
-    {4, 6, infinity, 1, 4} 
+    {infinity, infinity, infinity, infinity, infinity},  
+    {infinity, infinity, infinity, infinity, infinity}, 
+    {infinity, infinity, infinity, infinity, infinity},  
+    {infinity, infinity, infinity, infinity, infinity},  
+    {infinity, infinity, infinity, infinity, infinity} 
 };
 
 int main() {
 
 
-    MatrixGraph m(test3);
+    MatrixGraph m(test1);
     m.print(); 
+    std::vector<int> dist;
+    std::vector<int> pred; 
+    m.dijkstraNoHeap(0, dist, pred); 
+
+    for(int i=0; i<dist.size(); ++i) {
+        std::cout << i << ") pred: " << pred[i] 
+        << " | dist: " << dist[i] << std::endl; 
+    }
 
 
 

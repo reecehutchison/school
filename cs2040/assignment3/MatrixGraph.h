@@ -12,6 +12,7 @@ public:
     : adjacencyMatrix(matrix){}; 
 
     void print(); 
+    void dijkstraNoHeap(int start, std::vector<int>& dist, std::vector<int>& pred);
 };
 
 

@@ -1,0 +1,7 @@
+1. make a heap class for min heap, that way you can use for matrix and
+    the list. 
+2. make a dijkstras with the heap for the matrix class
+3. make a list class 
+4. make the non heap and heap implementations for dijkstras using list
+5. set up your test graphs and report in the main file
+6. comment all code and put function headers 
