@@ -1,8 +1,2 @@
 # school
-Some of the projects that I completed during classes I have taken at Northwestern Polytech.
-
-classes: 
-- cs2010 (practical programming methodologies)
-- cs2290 (computer architecture one)
-
-todo - get java first year projects on here (current projects are only from 2nd year)
+Some of the projects that I completed during classes I have taken at Northwestern Polytechnic. I don't have any projects from first year (java and oop).
