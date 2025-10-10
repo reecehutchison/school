@@ -64,6 +64,7 @@ int main(int argc, char* argv[]) {
     List* primes = findPrimes(lowerBound, upperBound);
      
     ListNode* curr = primes->head; 
+    printf("primes: "); 
     while (curr != NULL) {
         printf("%d ", curr->val);
         curr = curr->next; 
