@@ -12,6 +12,9 @@
 #include "string.h"
 #include "stdlib.h"
 
+#define TRUE 1
+#define FALSE 0
+
 #define VALID_ARGS 0
 #define INVALID_ARG_COUNT 1
 #define ARGS_ARE_NOT_NUMBERS 2
@@ -22,10 +25,24 @@
 #define VALID_RANGE 0
 #define INVALID_RANGE 1
 
+typedef struct ListNode {
+    int val; 
+    struct ListNode* next; 
+} ListNode; 
+
+typedef struct List {
+    ListNode* head; 
+    ListNode* tail; 
+} List; 
+
+List* findPrimes(int lowerBound, int UpperBound);
 int validateCommandLineArguments(int argc, char* argv[]);
 int stringIsNotNumber(char* ch);
 void handleInvalidArgs(int err);
 int validateRange(int lowerBound, int upperBound); 
+List* createList();
+void append(List* list, int newVal);
+void freeList(List* list);
 
 int main(int argc, char* argv[]) {
 
@@ -44,12 +61,51 @@ int main(int argc, char* argv[]) {
         return err; 
     }
 
-    printf("lower %d\n", lowerBound);
-    printf("upper %d\n", upperBound);
+    List* primes = findPrimes(lowerBound, upperBound);
+     
+    ListNode* curr = primes->head; 
+    while (curr != NULL) {
+        printf("%d ", curr->val);
+        curr = curr->next; 
+    }
+    printf("\n");
 
+    freeList(primes); 
 
     return 0; 
 }
+
+List* findPrimes(int lowerBound, int upperBound) {
+    List* primes = createList(); 
+    int n = upperBound + 1;
+    int seen[n];
+
+    seen[0] = TRUE;
+    seen[1] = TRUE; 
+
+    for (int i = 2; i < n; i++) {
+        seen[i] = FALSE; 
+    }
+
+    for (int i = 2; i < n; i++) {
+        if (seen[i]) {
+            continue; 
+        }
+
+        int prime = i; 
+        
+        if (prime >= lowerBound && prime <= upperBound) {
+            append(primes, prime); 
+        }
+
+        for (int j = prime * prime; j < n; j += prime) {
+            seen[j] = TRUE; 
+        }
+    }
+    
+    return primes;
+}
+
 
 int validateCommandLineArguments(int argc, char* argv[]) {
     if (argc != 3) {
@@ -96,9 +152,43 @@ void handleInvalidArgs(int err) {
 }
 
 int validateRange(int lowerBound, int upperBound) {
-    if (lowerBound < 1 || lowerBound > upperBound) {
+    if (lowerBound < 2 || lowerBound > upperBound) {
        return INVALID_RANGE; 
     }
 
     return VALID_RANGE; 
+}
+
+List* createList() {
+    List* newList = malloc(sizeof(List)); 
+    newList->head = NULL; 
+    newList->tail = NULL; 
+
+    return newList;
+}
+
+void append(List* list, int newVal) {
+    ListNode* newListNode = malloc(sizeof(ListNode)); 
+    newListNode->next = NULL; 
+    newListNode->val = newVal; 
+    
+    if (list->head == NULL) {
+        list->head = newListNode;
+        list->tail = newListNode; 
+    } else {
+        list->tail->next = newListNode; 
+        list->tail = newListNode; 
+    }
+}
+
+void freeList(List* list) {
+    ListNode* curr = list->head;
+
+    while (curr != NULL) {
+        ListNode* tmp = curr;
+        curr = curr->next;
+        free(tmp);
+    }
+
+    free(list);
 }
