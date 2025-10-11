@@ -8,6 +8,12 @@
     * bounds are given as command line arguments. 
 */
 
+// -- CHANGE THIS FOR DIFFERENT MODES! -- // 
+// WRITE TO JUST STD OUT == 0
+// WRITE TO FILE MODE AND STD OUT == 1
+#define OUTPUT_MODE 1
+// ------------------------------------- //
+
 #include "stdio.h"
 #include "string.h"
 #include "stdlib.h"
@@ -43,6 +49,7 @@ int validateRange(int lowerBound, int upperBound);
 List* createList();
 void append(List* list, int newVal);
 void freeList(List* list);
+void writePrimeToFile(int lower, int upper, int prime);
 
 int main(int argc, char* argv[]) {
 
@@ -67,6 +74,11 @@ int main(int argc, char* argv[]) {
     printf("primes: "); 
     while (curr != NULL) {
         printf("%d ", curr->val);
+
+        if (OUTPUT_MODE) {
+            writePrimeToFile(lowerBound, upperBound, curr->val);
+        }
+
         curr = curr->next; 
     }
     printf("\n");
@@ -192,4 +204,18 @@ void freeList(List* list) {
     }
 
     free(list);
+}
+
+void writePrimeToFile(int lower, int upper, int prime) {
+    char filename[100];
+    snprintf(filename, sizeof(filename), "./outputs/primes_%d_%d.txt", lower, upper);
+    
+    FILE *fp = fopen(filename, "a");  
+    if (fp == NULL) {
+        perror("Failed to open output file");
+        return;
+    }
+    
+    fprintf(fp, "%d ", prime);
+    fclose(fp);
 }
