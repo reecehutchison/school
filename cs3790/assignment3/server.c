@@ -106,39 +106,57 @@ int main() {
         char user[128];
         char pass[256];
 
-        // parse username and password from client
-        if (sscanf(buffer, "%127s %255s", user, pass) == 2) {
-            printf("Server: parsed user='%s', pass='%s'\n", user, pass);
+        // get USER command from client
+        char command[64];
+        if (sscanf(buffer, "%63s %127s %255s", command, user, pass) == 3 && strcmp(command, "USER") == 0) {
+            printf("Server: parsed USER command user='%s', pass='%s'\n", user, pass);
+            
             int ok = validateUser("passwords.txt", pass, user);
+            
             if (ok) {
                 printf("Server: +ACCOUNT VALID\n");
-                write(fdWrite, "valid\n", strlen("valid\n"));
+                
+                write(fdWrite, "+ACCOUNT VALID\n", strlen("+ACCOUNT VALID\n"));
 
-                // authenticated user command loop
+                // user command loop
                 while (1) {
                     ssize_t bytesRead = read(fdRead, buffer, sizeof(buffer) - 1);
+                    
                     if (bytesRead > 0) {
                     buffer[bytesRead] = '\0';
                     buffer[strcspn(buffer, "\n")] = 0;
+                    
                     printf("Received command: %s\n", buffer);
 
-                    // check if command is fib
+                    // check if command starts with EXEC
                     char *token = strtok(buffer, " ");
-                    if (token && strcmp(token, "fib") == 0) {
-                        printf("Server: executing fib command\n");
-                        // fork and exec the fib program
-                        if (fork() == 0) {
-                            char *args[10];
-                            args[0] = "./targets/fib";
-                            int i = 1;
-                            while ((token = strtok(NULL, " ")) && i < 9) {
-                                args[i++] = token;
+
+                    if (token && strcmp(token, "EXEC") == 0) {
+                        printf("Server: executing EXEC command\n");
+
+                        // get the program name
+                        token = strtok(NULL, " ");
+                        if (token) {
+                            // fork and exec the program
+                            if (fork() == 0) {
+                                char *args[10];
+                                char path[256];
+                                snprintf(path, sizeof(path), "./targets/%s", token);
+                                args[0] = path;
+                                int i = 1;
+
+                                while ((token = strtok(NULL, " ")) && i < 9) {
+                                    args[i++] = token;
+                                }
+                                args[i] = NULL;
+                                execv(path, args);
+
+                                exit(1);
+                            } else {
+                                wait(NULL);
                             }
-                            args[i] = NULL;
-                            execv("./targets/fib", args);
-                            exit(1);
                         } else {
-                            wait(NULL);
+                            printf("Server: no program specified\n");
                         }
                     } else {
                         printf("Server: unknown command\n");
@@ -150,11 +168,11 @@ int main() {
 
             } else {
                 printf("Server: -INVALID ACCOUNT. +GOODBYE\n");
-                write(fdWrite, "invalid\n", strlen("invalid\n"));
+                write(fdWrite, "-INVALID ACCOUNT.\n+GOODBYE\n", strlen("-INVALID ACCOUNT.\n+GOODBYE\n"));
             }
         } else {
             printf("Server: unsupported message: %s\n", buffer);
-            write(fdWrite, "invalid\n", strlen("invalid\n"));
+            write(fdWrite, "-INVALID ACCOUNT.\n+GOODBYE\n", strlen("-INVALID ACCOUNT.\n+GOODBYE\n"));
         }
     }
 

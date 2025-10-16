@@ -32,7 +32,7 @@ int main() {
     char buffer[BUFFER_SIZE];
 
 
-    // main client loop 
+    // main client loop
     while(1) {
         // get user input
         printf("--------------------------------------\n");
@@ -46,12 +46,13 @@ int main() {
         if (!fgets(passKey, sizeof(passKey), stdin)) break;
         passKey[strcspn(passKey, "\n")] = '\0';
 
-        // send keys to server
-        snprintf(message, sizeof(message), "%s %s", userKey, passKey);
+        // send USER command to server
+        snprintf(message, sizeof(message), "USER %s %s", userKey, passKey);
 
         ssize_t bytesWritten = write(fdWrite, message, strlen(message));
         if (bytesWritten == -1) {
             fprintf(stderr, "Client: failed to write to pipe\n");
+
             return 1;
         }
 
@@ -62,12 +63,14 @@ int main() {
             printf("Server response: %s\n", buffer);
 
             // if valid login, let user enter commands
-            if (strncmp(buffer, "valid", 5) == 0) {
-                printf("Enter command: ");
+            if (strncmp(buffer, "+ACCOUNT VALID", 14) == 0) {
+                printf("Enter EXEC command (e.g., EXEC fib 5): ");
                 char command[MESSAGE_SIZE];
+
                 if (fgets(command, sizeof(command), stdin)) {
                     command[strcspn(command, "\n")] = '\0';
                     ssize_t cmdWritten = write(fdWrite, command, strlen(command));
+                    
                     if (cmdWritten == -1) {
                         fprintf(stderr, "Client: failed to write command\n");
                     }
@@ -82,5 +85,6 @@ int main() {
 
     close(fdRead);
     close(fdWrite);
+    
     return 0;
 }
