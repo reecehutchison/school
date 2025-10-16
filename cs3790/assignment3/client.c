@@ -4,15 +4,24 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define NAMED_PIPE "myPipe"
-#define BUFFER_SIZE 99
+#define BUFFER_SIZE 256
 #define MESSAGE_SIZE 205
+
+#define FIFO_CS "client_to_server"
+#define FIFO_SC "server_to_client"
 
 int main() {
     
-    int fd = open(NAMED_PIPE, O_WRONLY);
-    if (fd == -1) {
-        fprintf(stderr, "Client: problem opening pipe");
+    int fdWrite = open(FIFO_CS, O_WRONLY);
+    if (fdWrite == -1) {
+        fprintf(stderr, "Client: error open write\n");
+        return 1;
+    }
+
+    int fdRead = open(FIFO_SC, O_RDONLY);
+    if (fdRead == -1) {
+        fprintf(stderr, "Client: error open read\n");
+        close(fdWrite);
         return 1;
     }
 
@@ -21,6 +30,8 @@ int main() {
     char userKey[BUFFER_SIZE]; 
     char passKey[BUFFER_SIZE]; 
     char message[MESSAGE_SIZE];
+    char buffer[BUFFER_SIZE];
+
 
     while(1) {
         // make the message
@@ -36,16 +47,22 @@ int main() {
 
         snprintf(message, sizeof(message), "%s %s", userKey, passKey);
 
-        ssize_t bytesWritten = write(fd, message, strlen(message));
+        ssize_t bytesWritten = write(fdWrite, message, strlen(message));
         if (bytesWritten == -1) {
             fprintf(stderr, "Client: failed to write to pipe\n");
-            close(fd);
             return 1;
         }
 
-        // message gets sent and now we wait for server to respond
-    }
+        // wait for server response
+        ssize_t bytesRead = read(fdRead, buffer, sizeof(buffer) - 1);
+        if (bytesRead > 0) {
+            buffer[bytesRead] = '\0';
+            printf("Server response: %s\n", buffer);
+        } else {
+            printf("Client: no response from server\n");
+        }    }
 
-    close(fd);
+    close(fdRead);
+    close(fdWrite);
     return 0;
 }

@@ -8,7 +8,8 @@
 #include <unistd.h>         
 
 
-#define NAMED_PIPE "myPipe"
+#define FIFO_CS "client_to_server"
+#define FIFO_SC "server_to_client"
 
 char* sha512Hash(const char *input) {
     unsigned char hash[SHA512_DIGEST_LENGTH];
@@ -59,22 +60,38 @@ int main() {
     printf("Server running:\n");
     printf("fib numbers: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89\n");
 
-    int err = mkfifo(NAMED_PIPE, 0666);
+    // flush old pipes
+    unlink(FIFO_CS);
+    unlink(FIFO_SC);
+
+    int err = mkfifo(FIFO_CS, 0666);
     if (err && errno != EEXIST) { 
         fprintf(stderr, "Server: mkfifo failed");
         return 1; 
     }
 
-    int fd = open(NAMED_PIPE, O_RDONLY);
-    if (fd == -1) {
-        fprintf(stderr, "Server: open failed");
+    err = mkfifo(FIFO_SC, 0666);
+    if (err && errno != EEXIST) { 
+        fprintf(stderr, "Server: mkfifo failed");
+        return 1; 
+    }
+
+    int fdRead = open(FIFO_CS, O_RDONLY | O_NONBLOCK);
+    if (fdRead == -1) {
+        fprintf(stderr, "Server: read open failed");
+        return 1;
+    }
+
+    int fdWrite = open(FIFO_SC, O_WRONLY);
+    if (fdWrite == -1) {
+        fprintf(stderr, "Server: write open failed");
         return 1;
     }
 
     // server loop
     char buffer[256];
     while (1) {
-        ssize_t bytesRead = read(fd, buffer, sizeof(buffer) - 1);
+        ssize_t bytesRead = read(fdRead, buffer, sizeof(buffer) - 1);
         if (bytesRead > 0) {
             printf("-------------------------------\n");
             buffer[bytesRead] = '\0';
@@ -92,11 +109,14 @@ int main() {
             int ok = validateUser("passwords.txt", pass, user);
             if (ok) {
                 printf("Server: +ACCOUNT VALID\n");
+                write(fdWrite, "valid\n", strlen("valid\n"));
             } else {
                 printf("Server: -INVALID ACCOUNT. +GOODBYE\n");
+                write(fdWrite, "invalid\n", strlen("invalid\n"));
             }
         } else {
             printf("Server: bad or unsupported message: %s\n", buffer);
+            write(fdWrite, "invalid\n", strlen("invalid\n"));
         }
     }
 
