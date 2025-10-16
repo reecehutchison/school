@@ -5,7 +5,7 @@
 #include <string.h>
 #include <openssl/sha.h>
 
-char* sha512_hash(const char *input) {
+char* sha512Hash(const char *input) {
     unsigned char hash[SHA512_DIGEST_LENGTH];
     char* hash_hex = malloc(SHA512_DIGEST_LENGTH * 2 + 1);
 
@@ -30,7 +30,7 @@ int validateUser(char* filename, char* password, char* passKey) {
     char key[256];
     char val[1024];
 
-    char* hash = sha512_hash(password);
+    char* hash = sha512Hash(password);
 
     while (fgets(key, sizeof(key), file) && fgets(val, sizeof(val), file)) {
         // remove newlines

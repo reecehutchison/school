@@ -3,7 +3,7 @@
 #include <openssl/sha.h>
 #include <stdlib.h>
 
-char* sha512_hash(const char *input) {
+char* sha512Hash(const char *input) {
     unsigned char hash[SHA512_DIGEST_LENGTH];
     char* hash_hex = malloc(SHA512_DIGEST_LENGTH * 2 + 1);
 
@@ -20,7 +20,7 @@ char* sha512_hash(const char *input) {
 
 int main(void) {
     const char* password = "apple";
-    char* hash = sha512_hash(password);
+    char* hash = sha512Hash(password);
 
     printf("key  : '%s'\n", password);
     printf("hash : '%s'\n", hash);
