@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
     }
 
     int fibVal = computeFib(n);
-    printf("Fib val: %d\n", fibVal);
+    printf("(%d) fib val: %d\n",n, fibVal);
     
     return 0;
 }

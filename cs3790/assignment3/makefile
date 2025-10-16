@@ -7,3 +7,4 @@ all:
 	gcc fib.c -o targets/fib
 	gcc server.c -o targets/server $(CFLAGS)
 	gcc hash.c -o targets/hash $(CFLAGS)
+	gcc client.c -o targets/client

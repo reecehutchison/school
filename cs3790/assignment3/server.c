@@ -1,9 +1,14 @@
-#include <stdlib.h>
 #include <stdio.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <string.h>
-#include <openssl/sha.h>
+#include <stdlib.h>        
+#include <string.h>         
+#include <openssl/sha.h>   
+#include <errno.h>   
+#include <sys/stat.h>      
+#include <fcntl.h>          
+#include <unistd.h>         
+
+
+#define NAMED_PIPE "myPipe"
 
 char* sha512Hash(const char *input) {
     unsigned char hash[SHA512_DIGEST_LENGTH];
@@ -51,14 +56,49 @@ int validateUser(char* filename, char* password, char* passKey) {
 }
 
 int main() {
-    
-    int result = validateUser("passwords.txt", "bob", "bob");
-    printf("result : %d\n", result);
+    printf("Server running:\n");
+    printf("fib numbers: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89\n");
 
-    // leave this in!!!! DELETE THIS THO WHEN DONE!
-    // TODO: go make it print the val in the fib.c...
-    printf("fib numbers: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89");
-    
+    int err = mkfifo(NAMED_PIPE, 0666);
+    if (err && errno != EEXIST) { 
+        fprintf(stderr, "Server: mkfifo failed");
+        return 1; 
+    }
+
+    int fd = open(NAMED_PIPE, O_RDONLY);
+    if (fd == -1) {
+        fprintf(stderr, "Server: open failed");
+        return 1;
+    }
+
+    // server loop
+    char buffer[256];
+    while (1) {
+        ssize_t bytesRead = read(fd, buffer, sizeof(buffer) - 1);
+        if (bytesRead > 0) {
+            printf("-------------------------------\n");
+            buffer[bytesRead] = '\0';
+            buffer[strcspn(buffer, "\n")] = 0;
+            printf("Received from client: %s\n", buffer);
+        } else {
+            continue;
+        }
+
+        char user[128];
+        char pass[256];
+
+        if (sscanf(buffer, "%127s %255s", user, pass) == 2) {
+            printf("Server: parsed user='%s', pass='%s'\n", user, pass);
+            int ok = validateUser("passwords.txt", pass, user);
+            if (ok) {
+                printf("Server: +ACCOUNT VALID\n");
+            } else {
+                printf("Server: -INVALID ACCOUNT. +GOODBYE\n");
+            }
+        } else {
+            printf("Server: bad or unsupported message: %s\n", buffer);
+        }
+    }
 
     return 0; 
 }
