@@ -35,6 +35,7 @@ int main() {
 
     while(1) {
         // make the message
+        printf("--------------------------------------\n");
         printf("Please enter a user key and a pass key\n");
         
         printf("user key: ");
