@@ -54,6 +54,10 @@ int main() {
     
     int result = validateUser("passwords.txt", "bob", "bob");
     printf("result : %d\n", result);
+
+    // leave this in!!!! DELETE THIS THO WHEN DONE!
+    // TODO: go make it print the val in the fib.c...
+    printf("fib numbers: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89");
     
 
     return 0; 
