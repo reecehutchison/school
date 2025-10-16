@@ -2,7 +2,6 @@
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
-#include <stdio.h>
 
 #define BUFFER_SIZE 256
 #define MESSAGE_SIZE 205

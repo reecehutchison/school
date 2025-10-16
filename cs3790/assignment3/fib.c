@@ -51,6 +51,7 @@ int main(int argc, char* argv[]) {
 
     if (n > 12) {
         fprintf(stderr, "Fib: only aloud values less then 12");
+        return 1; 
     }
 
     int fibVal = computeFib(n);
