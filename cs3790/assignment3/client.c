@@ -32,11 +32,12 @@ int main() {
     char buffer[BUFFER_SIZE];
 
 
+    // main client loop 
     while(1) {
-        // make the message
+        // get user input
         printf("--------------------------------------\n");
         printf("Please enter a user key and a pass key\n");
-        
+
         printf("user key: ");
         if (!fgets(userKey, sizeof(userKey), stdin)) break;
         userKey[strcspn(userKey, "\n")] = '\0';
@@ -45,6 +46,7 @@ int main() {
         if (!fgets(passKey, sizeof(passKey), stdin)) break;
         passKey[strcspn(passKey, "\n")] = '\0';
 
+        // send keys to server
         snprintf(message, sizeof(message), "%s %s", userKey, passKey);
 
         ssize_t bytesWritten = write(fdWrite, message, strlen(message));
@@ -58,9 +60,25 @@ int main() {
         if (bytesRead > 0) {
             buffer[bytesRead] = '\0';
             printf("Server response: %s\n", buffer);
+
+            // if valid login, let user enter commands
+            if (strncmp(buffer, "valid", 5) == 0) {
+                printf("Enter command: ");
+                char command[MESSAGE_SIZE];
+                if (fgets(command, sizeof(command), stdin)) {
+                    command[strcspn(command, "\n")] = '\0';
+                    ssize_t cmdWritten = write(fdWrite, command, strlen(command));
+                    if (cmdWritten == -1) {
+                        fprintf(stderr, "Client: failed to write command\n");
+                    }
+                }
+            } else {
+                printf("Client: invalid user key or pass key\n");
+            }
         } else {
             printf("Client: no response from server\n");
-        }    }
+        }
+    }
 
     close(fdRead);
     close(fdWrite);
