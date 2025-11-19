@@ -166,8 +166,8 @@ class CalgaryZoo(Zoo):
         animals = [GrizzlyBear, Moose, Penguin]
         calgaryAnimalFactory = AnimalFactory(animals)
         
-        for animal in torontoAnimalFactory.getAnimals():
-            self.animals.append(torontoAnimalFactory.create(animal))
+        for animal in calgaryAnimalFactory.getAnimals():
+            self.animals.append(calgaryAnimalFactory.create(animal))
         
 
 # test the classes!
