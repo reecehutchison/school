@@ -164,7 +164,7 @@ class CalgaryZoo(Zoo):
         
     def createAnimals(self) -> None:
         animals = [GrizzlyBear, Moose, Penguin]
-        torontoAnimalFactory = AnimalFactory(animals)
+        calgaryAnimalFactory = AnimalFactory(animals)
         
         for animal in torontoAnimalFactory.getAnimals():
             self.animals.append(torontoAnimalFactory.create(animal))
