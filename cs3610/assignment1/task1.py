@@ -111,7 +111,7 @@ class AnimalFactory:
             return animalType()
 
 
-class Zoo: 
+class Zoo(ABC): 
     """Zoo is an abstract class that zoo will implement.
     
         Derived classes are real zoos!
