@@ -2,16 +2,15 @@ from abc import ABC, abstractmethod
 from typing import Type
 
 
-class Animal:
+class Animal(ABC):
     """Animal acts as an interface that animals should inherit from.
 
         Inheriting classes will need to implement the SAY_SOMETHING()
         method.
     """
     
-    @classmethod
     @abstractmethod
-    def SAY_SOMETHING() -> str:
+    def SAY_SOMETHING(self) -> str:
         pass
     
     
@@ -122,7 +121,6 @@ class Zoo:
         self.animals = list()
         self.ourItinerary = ourItinerary
         
-    @classmethod
     @abstractmethod
     def createAnimals(self) -> None:
         pass
@@ -182,7 +180,7 @@ torontoZoo.createAnimals()
 torontoZoo.startVisit()
 print(" ~-------------------~\n")
 
-print(" ~--~ Toronto Zoo ~--~")
+print(" ~--~ Calgary Zoo ~--~")
 calgaryZoo.createAnimals()
 calgaryZoo.startVisit()
 print(" ~-------------------~\n")
