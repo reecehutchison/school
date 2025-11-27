@@ -14,7 +14,11 @@ public class FileService {
             ArrayList<String> values = new ArrayList<>();
 
             while (scanner.hasNext()) {
-                values.add(scanner.next());
+                char s[] = scanner.next().toCharArray();
+                if (s[0] == '#') {
+                    continue;
+                }
+                values.add(new String(s));
             }
 
             this.data = values;
