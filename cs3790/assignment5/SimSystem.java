@@ -62,6 +62,25 @@ public class SimSystem {
         }
     }
 
+    public boolean BankersAlg(List<Integer> arr) {
+        int process = arr.get(0);
+        int[] request = new int[this.resourceCount];
+        int n = arr.size();
+        for (int i = 1; i < n; i++) {
+            request[i - 1] = arr.get(i);
+        }
+
+        // check condition 1: if request <= need
+        for (int i = 0; i < n; i++) {
+            if (this.maxMatrix[process][i] > request[i]) {
+                return false;
+            }
+        }
+
+        // check condition 2: does a safe sequence exist
+        for (int i = 0; i < )
+    }
+
     public int getProcessCount() {
         return processCount;
     }
