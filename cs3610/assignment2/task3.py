@@ -51,7 +51,7 @@ class Department(CompanyComponent):
     def doOperation(self, op: str) -> None:
         print(f"{self.name} is doing {op}")
         
-    def addEmployee(self, emp: Employee):
+    def addEmployee(self, emp: Employee) -> None:
         self.employees.append(emp)
 
 
