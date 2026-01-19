@@ -6,7 +6,7 @@ rollDice := [roll := r between: 1 and:6].
 addCount := [:val | count := count + val].
 subCount := [:val | count := count - val].
 
-[ (roll ~= 1)] whileTrue:  [
+[(roll ~= 1)] whileTrue: [
     
     Transcript show: 'Please <Enter> to roll'.
     stdin nextLine.
