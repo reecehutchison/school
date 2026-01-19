@@ -89,7 +89,27 @@ div {
 
 .right p {
     margin-top: 8px;
-    line-height: 1.6;
+    line-height: 30px;
+    text-indent: 30px;
+}
+
+.font1 {
+    font-family: Georgia, serif;
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+.font2 {
+    font-family: Verdana, sans-serif;
+    font-size: 14px;
+    color: #34495e;
+    text-indent: 0;
+}
+
+.font3 {
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    color: #1a252f;
 }
 
 .right a {
@@ -147,4 +167,19 @@ div {
 .hobby-photo {
     width: 500px;
     margin-top: 10px;
+}
+
+.page3-bg {
+    background: url('public/background.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.page3-bg .right {
+    background-color: rgba(236, 240, 241, 0.85);
+}
+
+#top, #bottom {
+    display: block;
+    height: 0;
 }
