@@ -143,3 +143,8 @@ div {
     margin-left: 25px;
     font-size: 14px;
 }
+
+.hobby-photo {
+    width: 500px;
+    margin-top: 10px;
+}
