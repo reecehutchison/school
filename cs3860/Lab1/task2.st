@@ -10,7 +10,6 @@ getRollValue : returns lastRollValue
 getRunningScore : returns runningScore
 -----------
 "
-
 Object subclass: Game [
     | lastRollValue runningScore | 
 
@@ -38,9 +37,16 @@ g := Game new.
 g initialize.
 
 [ g getLastRollValue ~= 1 ] whileTrue: [
-   'Press <Enter> to roll' print.
-    stdin nextLine.
-   ('You rolled a ', g rollDice printString, ' and your total is ', g getRunningScore printString) printNl.
+    'Press <Enter> to roll or press <q> to quit' print.
+    input := stdin nextLine.
+    
+    "if input is good"
+    ('You rolled a ', 
+        g rollDice printString, 
+        ' and your total is ', 
+        g getRunningScore printString) 
+    printNl.
+    "else input is q"
 ]
 
 ('You got ', g getRunningScore printString) printNl
