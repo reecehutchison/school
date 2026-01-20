@@ -36,6 +36,11 @@ Object subclass: Game [
 
 g := Game new.
 g initialize.
-(g rollDice) printNl.
-(g rollDice) printNl.
-(g getRunningScore) printNl
+
+[ g getLastRollValue ~= 1 ] whileTrue: [
+   'Press <Enter> to roll' print.
+    stdin nextLine.
+   ('You rolled a ', g rollDice printString, ' and your total is ', g getRunningScore printString) printNl.
+]
+
+('You got ', g getRunningScore printString) printNl
