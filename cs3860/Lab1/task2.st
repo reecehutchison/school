@@ -8,6 +8,7 @@ runningScore : Integer
 rollDice : changes value of lastRollValue attribute
 getRollValue : returns lastRollValue
 getRunningScore : returns runningScore
+setLastRollValue : sets lastRollValue to 1 (used to exit loop)
 -----------
 "
 Object subclass: Game [
@@ -38,6 +39,8 @@ Object subclass: Game [
         ^runningScore
     ]
 ]
+
+"---------- application logic ----------"
 
 g := Game new.
 g initialize.
