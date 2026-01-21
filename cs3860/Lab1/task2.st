@@ -20,8 +20,14 @@ Object subclass: Game [
 
     rollDice [
         lastRollValue := (Random new next * 6) truncated + 1.
-        runningScore := runningScore + lastRollValue.
+        (lastRollValue ~= 1) ifTrue: [
+            runningScore := runningScore + lastRollValue.
+        ].
         ^lastRollValue
+    ]
+
+    setLastRollValue [
+        lastRollValue := 1
     ]
 
     getLastRollValue [
@@ -37,16 +43,18 @@ g := Game new.
 g initialize.
 
 [ g getLastRollValue ~= 1 ] whileTrue: [
-    'Press <Enter> to roll or press <q> to quit' print.
+    'Press <Enter> to roll or enter "q" to quit' print.
     input := stdin nextLine.
-    
-    "if input is good"
+    (input ~= 'q') ifTrue: [
     ('You rolled a ', 
         g rollDice printString, 
         ' and your total is ', 
         g getRunningScore printString) 
     printNl.
-    "else input is q"
+    ].
+    (input ~= 'q') ifFalse: [
+        g setLastRollValue 
+    ]
 ]
 
-('You got ', g getRunningScore printString) printNl
+('You rolled a total of ', g getRunningScore printString) printNl
