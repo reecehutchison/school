@@ -95,7 +95,6 @@ input := ''.
         ].
 
         bankRoll := g turn.
-        'Bank rolled: ' print. bankRoll printNl.
 
         (bankRoll = 6) ifTrue: [
             'Bank hit a 6, you lose!' printNl.
@@ -110,7 +109,7 @@ input := ''.
         ((bankRoll >= 2) & (bankRoll <= 5)) ifTrue: [
             'Bank established point: ' print. bankRoll printNl.
             playerRoll := g turn.
-            'You rolled: ' print. playerRoll printNl.
+            'You hit: ' print. playerRoll printNl.
 
             (playerRoll > bankRoll) ifTrue: [
                 'You win!' printNl.
