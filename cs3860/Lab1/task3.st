@@ -35,6 +35,7 @@ Object subclass: Game [
         roll at: 2 put: (Random new next * 6) truncated + 1.
         roll at: 3 put: (Random new next * 6) truncated + 1.
 
+        "sorting roll limits cardinality, as if we were grouping anagrams"
         ^roll := roll asSortedCollection asArray.
         
     ]

@@ -5,6 +5,7 @@ import os
 if __name__ == '__main__':
     originalImage = plt.imread(os.path.join(os.path.dirname(__file__), './boy.jpg'))
     posterizedImage = np.array((originalImage // 64) * 64)
+    print(posterizedImage)
     
     fig, (ax1, ax2) = plt.subplots(1, 2)
     ax1.imshow(originalImage)
