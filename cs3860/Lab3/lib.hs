@@ -60,14 +60,14 @@ pascalTriangle n
 
 
 -- task 4 : caesar cipher and decipher
-alphabet = "abcdefghijklmnopqrstuvwxyz"
+alphabet = "abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 -- lets just only do lowercase letters.... lol
 letterToNumber :: Char -> Int
 letterToNumber ch = head [i | (c, i) <- zip alphabet [0..], c == ch]
 
 numberToLetter :: Int -> Char
-numberToLetter n = alphabet !! (n `mod` 26)
+numberToLetter n = alphabet !! (n `mod` 53)
 
 shiftLetter :: Char -> Int -> Char
 shiftLetter ch n = numberToLetter (letterToNumber ch+n)
