@@ -1,4 +1,3 @@
-import Distribution.Compat.CharParsing (alphaNum)
 -- task 1 : transpose matrix
 -- use ' let arr = [[1..6],[21..26],[31..36]] ' for testing
 getCol :: [[a]] -> Int -> [a]
