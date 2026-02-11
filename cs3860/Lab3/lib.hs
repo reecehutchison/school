@@ -1,3 +1,4 @@
+import Distribution.Compat.CharParsing (alphaNum)
 -- task 1 : transpose matrix
 -- use ' let arr = [[1..6],[21..26],[31..36]] ' for testing
 getCol :: [[a]] -> Int -> [a]
@@ -60,3 +61,21 @@ pascalTriangle n
 
 
 -- task 4 : caesar cipher and decipher
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+-- lets just only do lowercase letters.... lol
+letterToNumber :: Char -> Int
+letterToNumber ch = head [i | (c, i) <- zip alphabet [0..], c == ch]
+
+numberToLetter :: Int -> Char
+numberToLetter n = alphabet !! (n `mod` 26)
+
+shiftLetter :: Char -> Int -> Char
+shiftLetter ch n = numberToLetter (letterToNumber ch+n)
+
+cipher :: [Char] -> Int -> [Char]
+cipher text n = map (`shiftLetter` n) text
+
+-- just go cipher but in the opposite way
+decipher :: String -> Int -> String
+decipher text n = cipher text (-n)
