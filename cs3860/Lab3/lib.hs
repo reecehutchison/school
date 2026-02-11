@@ -32,3 +32,31 @@ matMult mat1 mat2
   | not (isConformable mat1 mat2) = []
   | otherwise = map (`procRow` mat2T) mat1 
       where mat2T = transp mat2
+
+
+-- task 3 : pascal
+-- pascal is given a row of the triangle, and will return the next row
+-- we use tail to match every value we need to add...
+-- 1 3 3 1
+--  3 3 1  --> result of tail
+-- zip [1,3,3,1] [3,3,1] => [(1,3),(3,3),(3,1)]
+--                       1     4     6     4     1       
+pascal :: [Int] -> [Int]
+pascal [] = [1]
+pascal [1] = [1, 1]
+pascal arr = 1 : [a+b | (a, b) <- zip arr (tail arr)] ++ [1]
+
+-- triangle will produce the n'th row directly of pascal's triangle
+triangle :: Int -> [Int]
+triangle 0 = [1]
+triangle 1 = [1,1]
+triangle n = pascal (triangle (n-1))
+
+-- pascalTriangle will produce the full triangle to the n'th row
+pascalTriangle :: Int -> [[Int]]
+pascalTriangle n
+  | n < 0 = []
+  | otherwise = pascalTriangle (n-1) ++ [triangle n]
+
+
+-- task 4 : caesar cipher and decipher
