@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 if __name__ == "__main__":
-    img = cv2.imread('vitamins.png')
+    img = cv2.imread('travelbook.png')
 
     assert img is not None
 
@@ -18,7 +18,7 @@ if __name__ == "__main__":
         cv2.line(img, tuple(pts[1]), tuple(pts[2]), (255, 0, 0), 3)
         cv2.line(img, tuple(pts[2]), tuple(pts[3]), (255, 0, 0), 3)
         cv2.line(img, tuple(pts[3]), tuple(pts[0]), (255, 0, 0), 3)
-        print(decoded_text)
+        print(f'->{decoded_text}<-')
     else:
         print("No QR Code detected")
     
