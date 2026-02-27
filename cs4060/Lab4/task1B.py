@@ -24,7 +24,7 @@ if __name__ == "__main__":
     row = i // 4
     col = i % 4
     normalized = img / 255.0 
-    transformed = np.uint8(np.power(normalized, gamma) * 255)
+    transformed = np.power(normalized, gamma) * 255
     axes[row][col].imshow(transformed, cmap='gray')
     axes[row][col].set_title(f"Y = {gamma}")
     axes[row][col].axis('off')
