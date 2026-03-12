@@ -37,7 +37,7 @@ if __name__ == "__main__":
   
   fig, (ax1, ax2, ax3,) = plt.subplots(1, 3) 
 
-  ax1.hist(unnormalized)
+  ax1.hist(unnormalized, bins=256)
   ax1.set_title("UnNormalized")
   ax2.set_title("Normalized")
   ax2.bar(range(256), normalized, width=1)

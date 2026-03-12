@@ -12,7 +12,7 @@ if __name__ == "__main__":
   
   bit_depths = []
   bit_depths.append(0b10000000)  
-  bit_depths.append(0b0100000)  
+  bit_depths.append(0b01000000)  
   bit_depths.append(0b00100000)  
   bit_depths.append(0b00010000)  
   bit_depths.append(0b00001000)  
