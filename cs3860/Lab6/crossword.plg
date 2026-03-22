@@ -1,0 +1,24 @@
+% Part 3
+
+word(astante, a, s, t, a, n, t, e).
+word(astoria, a, s, t, o, r, i, a).
+word(baratto, b, a, r, a, t, t, o).
+word(cobalto, c, o, b, a, l, t, o).
+word(pistola, p, i, s, t, o, l, a).
+word(statale, s, t, a, t, a, l, e).
+
+crossword(Col1, Col2, Col3, Row1, Row2, Row3) :-
+    word(Col1, _, XY1_2, _, XY1_4, _, XY1_6, _),
+    word(Col2, _, XY2_2, _, XY2_4, _, XY2_6, _),
+    word(Col3, _, XY3_2, _, XY3_4, _, XY3_6, _),
+    word(Row1, _, XY1_2, _, XY2_2, _, XY3_2, _),
+    word(Row2, _, XY1_4, _, XY2_4, _, XY3_4, _),
+    word(Row3, _, XY1_6, _, XY2_6, _, XY3_6, _),
+    Col1 \= Col2, Col1 \= Col3, Col2 \= Col3,
+    Row1 \= Row2, Row1 \= Row3, Row2 \= Row3,
+    Col1 \= Row1, Col1 \= Row2, Col1 \= Row3,
+    Col2 \= Row1, Col2 \= Row2, Col2 \= Row3,
+    Col3 \= Row1, Col3 \= Row2, Col3 \= Row3.
+
+% Query:
+% ?- crossword(Row1, Row2, Row3, Col1, Col2, Col3).

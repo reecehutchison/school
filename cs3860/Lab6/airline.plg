@@ -1,0 +1,46 @@
+% Part 2
+
+% plane(PlaneNum, Model, Age)
+plane(p123, boeing747, 8).
+plane(p456, airbus320, 3).
+plane(p789, boeing747, 12).
+plane(p101, boeing777, 5).
+plane(p202, airbus320, 2).
+
+% flight(FlightNum, From, To, PlaneNum)
+flight(f407, toronto, paris, p123).
+flight(f237, paris, frankfurt, p456).
+flight(f112, newyork, paris, p789).
+flight(f330, losangeles, paris, p101).
+flight(f550, toronto, newyork, p202).
+
+% passenger(SIN, Name, City, Age)
+passenger(s456_234_987, anna, toronto, 26).
+passenger(s123_456_789, bob, newyork, 34).
+passenger(s987_654_321, carol, losangeles, 45).
+passenger(s111_222_333, dave, paris, 29).
+passenger(s444_555_666, anna, newyork, 31).
+
+% booked(SIN, FlightNum, Date, Price)
+booked(s456_234_987, f407, jan17, 500).
+booked(s123_456_789, f237, feb23, 350).
+booked(s987_654_321, f330, jan17, 800).
+booked(s111_222_333, f112, feb23, 450).
+booked(s444_555_666, f237, feb23, 375).
+booked(s456_234_987, f550, jan17, 200).
+
+
+% (a) The model and age of plane p123.
+% plane(p123, Model, Age).
+
+% (b) The plane number and age of every boeing 747.
+% plane(PlaneNum, boeing747, Age).
+
+% (c) The flight number of every plane going from New York to Paris.
+% flight(FlightNum, newyork, paris, _).
+
+% (d) The flight number and price paid by every passenger going from Los Angeles to Paris on Jan 17.
+% flight(FlightNum, losangeles, paris, _), booked(_, FlightNum, jan17, Price).
+
+% (e) The name and SIN of every passenger booked on flight f237 on Feb 23.
+% booked(SIN, f237, feb23, _), passenger(SIN, Name, _, _).
