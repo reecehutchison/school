@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
   for x in range(len(gauss_img)):
     for y in range(len(gauss_img[0])):
-      counts[(gauss_img[x][y] // 16)] += 1
+      counts[(gauss_img[x][y] // 4)] += 1
 
   roi = [0]
   max_count = counts[0]
@@ -31,7 +31,7 @@ if __name__ == "__main__":
   mask = np.zeros(gauss_img.shape, dtype=np.uint8)
   for x in range(len(gauss_img)):
     for y in range(len(gauss_img[0])):
-      if (gauss_img[x][y] // 16) in roi:
+      if (gauss_img[x][y] // 4) in roi:
         mask[x][y] = 255
 
   quantized = gauss_img // 16

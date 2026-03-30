@@ -9,7 +9,8 @@ if __name__ == "__main__":
 
   assert img is not None
 
-  shading = cv2.GaussianBlur(img, (101, 101), sigmaX=50)
+  print(img.shape)
+  shading = cv2.GaussianBlur(img, (301, 301), sigmaX=100)
 
   img_float = img.astype(np.float64) # convert so divisino works smoothly
   shading_float = shading.astype(np.float64)
@@ -25,7 +26,7 @@ if __name__ == "__main__":
       total += shading_float[x][y]
   mean = total / (len(shading_float) * len(shading_float[0]))
 
-  corrected = (img_float / shading_float) * mean
+  corrected = (img_float / shading_float)
   corrected = np.clip(corrected, 0, 255).astype(np.uint8)
 
   fig, axes = plt.subplots(1, 3, figsize=(12, 8))
