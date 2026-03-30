@@ -16,7 +16,7 @@ if __name__ == "__main__":
   noisy = np.zeros(img.shape, dtype=np.int16)
   for x in range(len(img)):
     for y in range(len(img[0])):
-      noisy[x][y] = img[x][y] + random.randint(-50, 50)
+      noisy[x][y] = int(img[x][y]) + random.randint(-50, 50)
   noisy = np.clip(noisy, 0, 255).astype(np.uint8)
   noisy_float = noisy.astype(np.float64)
 
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 
   median = cv2.medianBlur(noisy, 5)
 
-  geometric = np.zeros_like(noisy_float)
+  geometric = np.zeros(noisy.shape, dtype=np.float64)
   padded = np.pad(noisy_float, 2, mode='reflect')
   for i in range(len(noisy)):
     for j in range(len(noisy[0])):
@@ -53,7 +53,7 @@ if __name__ == "__main__":
       geometric[i][j] = np.exp(np.mean(np.log(region)))
   geometric = np.clip(geometric, 0, 255).astype(np.uint8)
 
-  harmonic = np.zeros_like(noisy_float)
+  harmonic = np.zeros(noisy.shape, dtype=np.float64)
   for i in range(len(noisy)):
     for j in range(len(noisy[0])):
       region = padded[i:i + 5, j:j + 5]

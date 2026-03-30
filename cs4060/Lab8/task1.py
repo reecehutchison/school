@@ -75,7 +75,7 @@ if __name__ == "__main__":
   axes[4].set_title('K = 3.0')
   axes[4].axis('off')
   plt.suptitle('2) Lowpass --> High Boost')
-  plt.tight_layout()
+
   plt.show()
 
   lp_hp = cv2.GaussianBlur(hp, (21, 21), sigmaX=5)
@@ -98,7 +98,7 @@ if __name__ == "__main__":
   axes[4].set_title('K = 3.0')
   axes[4].axis('off')
   plt.suptitle('2) Highpass --> High Boost')
-  plt.tight_layout()
+
   plt.show()
 
   lp_br = cv2.GaussianBlur(br, (21, 21), sigmaX=5)
@@ -121,7 +121,7 @@ if __name__ == "__main__":
   axes[4].set_title('K = 3.0')
   axes[4].axis('off')
   plt.suptitle('2) Bandreject --> High Boost')
-  plt.tight_layout()
+
   plt.show()
 
   lp_bp = cv2.GaussianBlur(bp, (21, 21), sigmaX=5)
@@ -144,5 +144,5 @@ if __name__ == "__main__":
   axes[4].set_title('K = 3.0')
   axes[4].axis('off')
   plt.suptitle('2) Bandpass --> High Boost')
-  plt.tight_layout()
+
   plt.show()
