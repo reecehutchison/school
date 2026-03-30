@@ -4,7 +4,7 @@ import os
 import cv2
 
 if __name__ == "__main__":
-  path = os.path.dirname(os.path.abspath(__file__)) + "/Lab8-1.png"
+  path = os.path.dirname(os.path.abspath(__file__)) + "/boy.png"
   img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
 
   assert img is not None
