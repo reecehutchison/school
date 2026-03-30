@@ -3,6 +3,7 @@ import numpy as np
 import os
 import cv2
 
+
 if __name__ == "__main__":
   path = os.path.dirname(os.path.abspath(__file__)) + "/boy.png"
   img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
@@ -27,34 +28,33 @@ if __name__ == "__main__":
 
   fig, axes = plt.subplots(2, 3, figsize=(15, 10))
 
-  axes[0, 0].imshow(img, cmap='gray')
-  axes[0, 0].set_title('Original')
-  axes[0, 0].axis('off')
+  axes[0][0].imshow(img, cmap='gray')
+  axes[0][0].set_title('Original')
+  axes[0][0].axis('off')
 
-  axes[0, 1].imshow(lp, cmap='gray')
-  axes[0, 1].set_title('Lowpass')
-  axes[0, 1].axis('off')
+  axes[0][1].imshow(lp, cmap='gray')
+  axes[0][1].set_title('Lowpass')
+  axes[0][1].axis('off')
 
-  axes[0, 2].imshow(hp, cmap='gray')
-  axes[0, 2].set_title('Highpass')
-  axes[0, 2].axis('off')
+  axes[0][2].imshow(hp, cmap='gray')
+  axes[0][2].set_title('Highpass')
+  axes[0][2].axis('off')
 
-  axes[1, 0].imshow(br, cmap='gray')
-  axes[1, 0].set_title('Bandreject')
-  axes[1, 0].axis('off')
+  axes[1][0].imshow(br, cmap='gray')
+  axes[1][0].set_title('Bandreject')
+  axes[1][0].axis('off')
 
-  axes[1, 1].imshow(bp, cmap='gray')
-  axes[1, 1].set_title('Bandpass')
-  axes[1, 1].axis('off')
+  axes[1][1].imshow(bp, cmap='gray')
+  axes[1][1].set_title('Bandpass')
+  axes[1][1].axis('off')
 
-  axes[1, 2].axis('off')
+  axes[1][2].axis('off')
 
   plt.suptitle('1) Filtered Images')
   plt.show()
 
-  # hb(x, y) = (K - 1) * f(x, y) + hp(f(x, y))
+  # hb(x, y) = (K-1) * f(x,y) + hp(f(x,y))
 
-  # High boost on Lowpass
   lp_lp = cv2.GaussianBlur(lp, (21, 21), sigmaX=5)
   hp_lp = lp - lp_lp
 
@@ -78,7 +78,6 @@ if __name__ == "__main__":
   plt.tight_layout()
   plt.show()
 
-  # High boost on Highpass
   lp_hp = cv2.GaussianBlur(hp, (21, 21), sigmaX=5)
   hp_hp = hp - lp_hp
 
@@ -102,7 +101,6 @@ if __name__ == "__main__":
   plt.tight_layout()
   plt.show()
 
-  # High boost on Bandreject
   lp_br = cv2.GaussianBlur(br, (21, 21), sigmaX=5)
   hp_br = br - lp_br
 
@@ -126,7 +124,6 @@ if __name__ == "__main__":
   plt.tight_layout()
   plt.show()
 
-  # High boost on Bandpass
   lp_bp = cv2.GaussianBlur(bp, (21, 21), sigmaX=5)
   hp_bp = bp - lp_bp
 

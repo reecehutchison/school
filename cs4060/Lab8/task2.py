@@ -4,6 +4,7 @@ import os
 import cv2
 import random
 
+
 if __name__ == "__main__":
   path = os.path.dirname(os.path.abspath(__file__)) + "/boy.png"
   img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
@@ -12,15 +13,16 @@ if __name__ == "__main__":
 
   img_float = img.astype(np.float64)
 
-  noisy = np.copy(img_float)
-  for i in range(noisy.shape[0]):
-    for j in range(noisy.shape[1]):
-      noisy[i, j] = noisy[i, j] + random.randint(-50, 50)
-  noisy = noisy.astype(np.uint8)
+  noisy = np.zeros(img.shape, dtype=np.int16)
+  for x in range(len(img)):
+    for y in range(len(img[0])):
+      noisy[x][y] = img[x][y] + random.randint(-50, 50)
+  noisy = np.clip(noisy, 0, 255).astype(np.uint8)
   noisy_float = noisy.astype(np.float64)
 
   denoised = cv2.GaussianBlur(noisy, (5, 5), sigmaX=1.5)
 
+  # unsharp mask to sharpen
   blurred = cv2.GaussianBlur(denoised.astype(np.float64), (5, 5), sigmaX=1.5)
   sharpened = np.clip(2.0 * denoised - blurred, 0, 255).astype(np.uint8)
 
@@ -44,19 +46,19 @@ if __name__ == "__main__":
 
   geometric = np.zeros_like(noisy_float)
   padded = np.pad(noisy_float, 2, mode='reflect')
-  for i in range(noisy_float.shape[0]):
-    for j in range(noisy_float.shape[1]):
+  for i in range(len(noisy)):
+    for j in range(len(noisy[0])):
       region = padded[i:i + 5, j:j + 5]
       region = np.clip(region, 1, 255)
-      geometric[i, j] = np.exp(np.mean(np.log(region)))
+      geometric[i][j] = np.exp(np.mean(np.log(region)))
   geometric = np.clip(geometric, 0, 255).astype(np.uint8)
 
   harmonic = np.zeros_like(noisy_float)
-  for i in range(noisy_float.shape[0]):
-    for j in range(noisy_float.shape[1]):
+  for i in range(len(noisy)):
+    for j in range(len(noisy[0])):
       region = padded[i:i + 5, j:j + 5]
       region = np.clip(region, 1, 255)
-      harmonic[i, j] = 25 / np.sum(1.0 / region)
+      harmonic[i][j] = 25 / np.sum(1.0 / region)
   harmonic = np.clip(harmonic, 0, 255).astype(np.uint8)
 
   fig, axes = plt.subplots(1, 4, figsize=(18, 4))
@@ -77,23 +79,23 @@ if __name__ == "__main__":
 
   fig, axes = plt.subplots(2, 3, figsize=(15, 8))
 
-  axes[0, 0].hist(img.flatten(), bins=256)
-  axes[0, 0].set_title('Original')
+  axes[0][0].hist(img.flatten(), bins=256)
+  axes[0][0].set_title('Original')
 
-  axes[0, 1].hist(noisy.flatten(), bins=256)
-  axes[0, 1].set_title('Noisy')
+  axes[0][1].hist(noisy.flatten(), bins=256)
+  axes[0][1].set_title('Noisy')
 
-  axes[0, 2].hist(denoised.flatten(), bins=256)
-  axes[0, 2].set_title('Denoised')
+  axes[0][2].hist(denoised.flatten(), bins=256)
+  axes[0][2].set_title('Denoised')
 
-  axes[1, 0].hist(median.flatten(), bins=256)
-  axes[1, 0].set_title('Median')
+  axes[1][0].hist(median.flatten(), bins=256)
+  axes[1][0].set_title('Median')
 
-  axes[1, 1].hist(geometric.flatten(), bins=256)
-  axes[1, 1].set_title('Geometric Mean')
+  axes[1][1].hist(geometric.flatten(), bins=256)
+  axes[1][1].set_title('Geometric Mean')
 
-  axes[1, 2].hist(harmonic.flatten(), bins=256)
-  axes[1, 2].set_title('Harmonic Mean')
+  axes[1][2].hist(harmonic.flatten(), bins=256)
+  axes[1][2].set_title('Harmonic Mean')
 
   plt.suptitle('4) Histograms')
   plt.show()
