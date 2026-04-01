@@ -19,6 +19,7 @@ door(hall, dining_room).
 door(dining_room, kitchen).
 door(kitchen, cellar).
 
+
 connect(X, Y) :- door(X, Y).
 connect(X, Y) :- door(Y, X).
 
@@ -28,9 +29,24 @@ list_things(Place) :-
     fail.
 list_things(_).
 
+
+look_in(desk) :-
+    \+ ate(_),
+    format("You're too hungry to do anything! Eat something first.~n"), !.
+look_in(desk) :-
+    here(Room),
+    location(desk, Room),
+    assert(have(flashlight)),
+    format("You found a flashlight in the desk! You're feeling courageous to enter the DARK AREA.~n"), !.
+look_in(washing_machine) :-
+    here(cellar),
+    assert(have(blankie)),
+    format("YOU DID IT, YOU FOUND YOUR BLANKY!~n"), !.
 look_in(Place) :-
     format("~w contains:~n", [Place]),
     list_things(Place).
+
+
 
 list_connections(Room) :-
     connect(Room, X),
@@ -38,9 +54,53 @@ list_connections(Room) :-
     fail.
 list_connections(_).
 
+:- dynamic here/1.
+:- dynamic have/1.
+:- dynamic ate/1.
+
+can_go(cellar) :-
+    \+ have(flashlight),
+    format("It's too dark to go in there! You need a flashlight.~n"), !, fail.
 can_go(Room) :-
     here(X),
     connect(X, Room).
+can_go(Room) :-
+    here(X),
+    \+ connect(X, Room),
+    format("You can't get there from here.~n"), fail.
+
+move(Room) :-
+    retract(here(_)),
+    assert(here(Room)).
+
+
+
+look :-
+    here(X),
+    format("you are in the ~w.~n", [X]),
+    format("you can see:~n"),
+    list_things(X),
+    format("you can go to:~n"),
+    list_connections(X).
+
+goto(Room) :-
+    can_go(Room),
+    move(Room),
+    look.
+
+eat(Thing) :-
+    edible(Thing),
+    here(Room),
+    location(Thing, Room),
+    assert(ate(Thing)),
+    format("Yum! You ate the ~w. You feel full and mighty!~n", [Thing]).
+eat(Thing) :-
+    tastes_yucky(Thing),
+    format("Yuck! You can't eat ~w!~n", [Thing]), fail.
+eat(_) :-
+    format("There's nothing like that here to eat.~n"), fail.
+
+
 
 edible(crackers).
 edible(apple).
@@ -48,4 +108,10 @@ edible(apple).
 tastes_yucky(X) :- \+ edible(X).
 
 turned_off(flashlight).
-here(kitchen).
+here(hall).
+
+% Game Actions:
+% goto(Room).
+% look.
+% look_in(Thing).
+% eat(Thing).
